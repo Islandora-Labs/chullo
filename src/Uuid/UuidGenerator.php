@@ -19,7 +19,8 @@ class UuidGenerator implements IUuidGenerator
      * @param string $namespace
      *   The initial namespace for the Uuid Generator.
      */
-    public function __construct($namespace = NULL) {
+    public function __construct($namespace = null)
+    {
         // Give sensible default namespace if none is provided.
         if (empty($namespace)) {
             $namespace = "islandora.ca";
@@ -27,11 +28,11 @@ class UuidGenerator implements IUuidGenerator
         
         // If we are passed a namespace UUID don't generate it.
         if (Uuid::isValid($namespace)) {
-          $this->namespace = $namespace;
+            $this->namespace = $namespace;
         }
         // Otherwise generate a namespace UUID from the passed in namespace.
         else {
-          $this->namespace = Uuid::uuid5(Uuid::NAMESPACE_DNS, $namespace);
+            $this->namespace = Uuid::uuid5(Uuid::NAMESPACE_DNS, $namespace);
         }
     }
 
@@ -40,7 +41,8 @@ class UuidGenerator implements IUuidGenerator
      *
      * @return String   Valid v4 UUID.
      */
-    public function generateV4() {
+    public function generateV4()
+    {
         return Uuid::uuid4()->toString();
     }
 
@@ -53,20 +55,18 @@ class UuidGenerator implements IUuidGenerator
      *   A namespace
      * @return String   Valid v5 UUID.
      */
-    public function generateV5($str, $namespace = NULL) {
+    public function generateV5($str, $namespace = null)
+    {
         // Use default namespace if none is provided.
         if (!empty($namespace)) {
-          // Is this a UUID already?
+            // Is this a UUID already?
           if (Uuid::isValid($namespace)) {
-            return Uuid::uuid5($namespace, $str)->toString();
+              return Uuid::uuid5($namespace, $str)->toString();
+          } else {
+              return Uuid::uuid5(Uuid::uuid5(Uuid::NAMESPACE_DNS, $namespace), $str)->toString();
           }
-          else {
-            return Uuid::uuid5(Uuid::uuid5(Uuid::NAMESPACE_DNS, $namespace), $str)->toString();
-          }
-        }
-        else {
-          return Uuid::uuid5($this->namespace, $str)->toString();
+        } else {
+            return Uuid::uuid5($this->namespace, $str)->toString();
         }
     }
-
 }

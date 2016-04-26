@@ -143,7 +143,6 @@ class FedoraApi implements IFedoraApi
         $transaction = "",
         $checksum = ""
     ) {
-
         $options = ['http_errors' => false];
 
         // Set content.
@@ -254,7 +253,6 @@ class FedoraApi implements IFedoraApi
         $uri,
         $transaction = ""
     ) {
-
         $options = ['http_errors' => false];
 
         // Ensure uri takes transaction into account.

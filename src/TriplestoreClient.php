@@ -24,7 +24,8 @@ class TriplestoreClient implements ITriplestoreClient
 
     protected $client;
 
-    public function __construct(Client $client) {
+    public function __construct(Client $client)
+    {
         $this->client = $client;
     }
 
@@ -48,7 +49,8 @@ class TriplestoreClient implements ITriplestoreClient
      *
      * @return EasyRdf_Sparql_Result    Results object
      */
-    public function query($sparql) {
+    public function query($sparql)
+    {
         $response = $this->client->post("", [
             'query' => [
                 'format' => 'json',

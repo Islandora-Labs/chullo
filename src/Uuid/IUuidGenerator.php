@@ -26,7 +26,8 @@ namespace Islandora\Chullo\Uuid;
  * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GPL
  * @link     http://www.islandora.ca
  */
-interface IUuidGenerator {
+interface IUuidGenerator
+{
 
     /**
      * Generates a v4 UUID.
@@ -40,5 +41,5 @@ interface IUuidGenerator {
      *
      * @return String   Valid v5 UUID.
      */
-    public function generateV5($name, $namespace = NULL);
+    public function generateV5($name, $namespace = null);
 }

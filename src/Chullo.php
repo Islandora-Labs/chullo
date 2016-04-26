@@ -135,7 +135,6 @@ class Chullo implements IFedoraClient
         $headers = [],
         $transaction = ""
     ) {
-
         $headers['Accept'] = 'application/ld+json';
         $rdf = $this->getResource($uri, $headers, $transaction);
         if (empty($rdf)) {
@@ -165,7 +164,6 @@ class Chullo implements IFedoraClient
         $transaction = "",
         $checksum = ""
     ) {
-
         $response = $this->api->createResource(
             $uri,
             $content,
