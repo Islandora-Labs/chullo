@@ -6,6 +6,8 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Islandora\Chullo\TriplestoreClient;
 
+namespace Islandora\Chullo;
+
 class TriplestoreClientTest extends \PHPUnit_Framework_TestCase
 {
 

@@ -7,6 +7,8 @@ use GuzzleHttp\Psr7\Response;
 use Islandora\Chullo\Chullo;
 use Islandora\Chullo\FedoraApi;
 
+namespace Islandora\Chullo;
+
 class CreateTransactionTest extends \PHPUnit_Framework_TestCase
 {
 
