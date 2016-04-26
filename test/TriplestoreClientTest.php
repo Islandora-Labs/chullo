@@ -37,7 +37,8 @@ EOD;
         ]);
 
         $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler, 'base_uri' => 'http://127.0.0.1:8080/bigdata/namespace/kb/sparql/']);
+        $guzzle = new Client(['handler' => $handler,
+          'base_uri' => 'http://127.0.0.1:8080/bigdata/namespace/kb/sparql/']);
         $client = new TriplestoreClient($guzzle);
 
         $result = $client->query("");
@@ -57,7 +58,8 @@ EOD;
         ]);
 
         $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler, 'base_uri' => 'http://127.0.0.1:8080/bigdata/namespace/kb/sparql/']);
+        $guzzle = new Client(['handler' => $handler,
+          'base_uri' => 'http://127.0.0.1:8080/bigdata/namespace/kb/sparql/']);
         $client = new TriplestoreClient($guzzle);
 
         $result = $client->query("");
