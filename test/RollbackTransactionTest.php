@@ -1,13 +1,13 @@
 <?php
 
+namespace Islandora\Chullo;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Islandora\Chullo\Chullo;
 use Islandora\Chullo\FedoraApi;
-
-namespace Islandora\Chullo;
 
 class RollbackTransactionTest extends \PHPUnit_Framework_TestCase
 {
