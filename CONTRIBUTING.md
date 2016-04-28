@@ -10,7 +10,7 @@ There is an additional 7.x-2.x Tech Call that occurs each Wednesday at 1:00pm Ea
 
 ### Use cases
 
-If you would like to submit a use case for the Chullo project, please submit and issue [here](https://github.com/Islandora-CLAW/Chullo/issues) using the [Use Case template](https://github.com/Islandora/Islandora-Fedora4-Interest-Group/wiki/Use-Case-template), assign the "use case" label to the issue.
+If you would like to submit a use case for Chullo, please submit an issue [here](https://github.com/Islandora-CLAW/Chullo/issues) using the [Use Case template](https://github.com/Islandora/Islandora-Fedora4-Interest-Group/wiki/Use-Case-template), assign the "use case" label to the issue.
 
 ### Documentation
 
@@ -56,14 +56,15 @@ Contributions to the Islandora codebase should be sent as GitHub pull requests. 
 
 ### Create a pull request
 
-Take a look at [Creating a pull request](https://help.github.com/articles/creating-a-pull-request).  In a nutshell you
-need to:
+Take a look at [Creating a pull request](https://help.github.com/articles/creating-a-pull-request). In a nutshell you need to:
 
 1. [Fork](https://help.github.com/articles/fork-a-repo) the Islandora GitHub repository at [https://github.com/Islandora-CLAW/chullo](https://github.com/Islandora-CLAW/chullo) to your personal GitHub account.  See [Fork a repo](https://help.github.com/articles/fork-a-repo) for detailed instructions.
 2. Commit any changes to your fork.
 3. Send a [pull request](https://help.github.com/articles/creating-a-pull-request) to the Islandora GitHub repository that you forked in step 1.  If your pull request is related to an existing issue -- for instance, because you reported a [bug/issue](https://github.com/Islandora-CLAW/Chullo/issues) earlier -- prefix the title of your pull request with the corresponding issue number (e.g. `issue-123: ...`). Please also include a reference to the issue in the description of the pull. This can be done by using '#' plus the issue number like so '#123', also try to pick an appropriate name for the branch in which you're issuing the pull request from. 
 
-You may want to read [Syncing a fork](https://help.github.com/articles/syncing-a-fork) for instructions on how to keep your fork up to date with the latest changes of the upstream (official) `islandora` repository.
+You may want to read [Syncing a fork](https://help.github.com/articles/syncing-a-fork) for instructions on how to keep your fork up to date with the latest changes of the upstream (official) `Islandora-CLAW` repository.
+
+Please note that TravisCI will test for [PSR-2](http://www.php-fig.org/psr/psr-2/) compliance. You can verify coding standard compliance with [PHP Codesniffer](https://github.com/squizlabs/PHP_CodeSniffer), or use a utility like PHP [Coding Standards Fixer](http://cs.sensiolabs.org/).
 
 ## License Agreements
 
