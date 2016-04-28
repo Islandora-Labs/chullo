@@ -66,6 +66,8 @@ You may want to read [Syncing a fork](https://help.github.com/articles/syncing-a
 
 Please note that TravisCI will test for [PSR-2](http://www.php-fig.org/psr/psr-2/) compliance. You can verify coding standard compliance with [PHP Codesniffer](https://github.com/squizlabs/PHP_CodeSniffer), or use a utility like PHP [Coding Standards Fixer](http://cs.sensiolabs.org/).
 
+In addition, Islandora 7.x-2.x Committers will review contributions for [PSR-4 ](http://www.php-fig.org/psr/psr-4/) compliance. 
+
 ## License Agreements
 
 The Islandora Foundation requires that contributors complete a [Contributor License Agreement](http://islandora.ca/sites/default/files/islandora_cla.pdf) or be covered by a [Corporate Contributor Licencse Agreement](http://islandora.ca/sites/default/files/islandora_ccla.pdf). The signed copy of the license agreement should be sent to <a href="mailto:community@islandora.ca?Subject=Contributor%20License%20Agreement" target="_top">community@islandora.ca</a>. This license is for your protection as a contributor as well as the protection of the Foundation and its users; it does not change your rights to use your own contributions for any other purpose.
