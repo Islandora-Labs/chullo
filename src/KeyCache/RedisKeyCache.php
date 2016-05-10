@@ -19,21 +19,6 @@ class RedisKeyCache implements IUuidCache
 {
   
     /**
-     * @var string $server_uri
-     *   the hostname of the Redis server.
-     */
-    protected $server_uri;
-    /**
-     * @var int $server_port
-     *   the port of the Redis server.
-     */
-    protected $server_port;
-    /**
-     * @var int $timeout
-     *   timeout value for communication.
-     */
-    protected $timeout;
-    /**
      * @var Redis $redis
      *   The Redis object.
      */
@@ -45,19 +30,12 @@ class RedisKeyCache implements IUuidCache
     private $connected = false;
   
     /**
-     * @param string $host
-     *   The hostname of the redis server.
-     * @param int $port
-     *   The port of the redis server.
-     * @param int $timeout
-     *   The timeout value (in seconds), 0 for unlimited.
+     * @param \Redis $instance
+     *   An instance of the Redis client
      */
-    public function __construct($host, $port, $timeout = 0)
+    public function __construct(\Redis $instance)
     {
-        $this->server_uri = $host;
-        $this->server_port = $port;
-        $this->timeout = $timeout;
-        $this->redis = new \Redis();
+        $this->redis = $instance;
     }
   
     /**
@@ -67,17 +45,11 @@ class RedisKeyCache implements IUuidCache
      */
     private function isConnected()
     {
-        $connected = false;
-        if ($this->connected) {
-            try {
-                $result = $this->redis->ping();
-                $connected = ($result == "+PONG");
-            } catch (RedisException $e) {
-                error_log("RedisKeyCache: Error communicating with Redis server - " . $e->getMessage());
-            }
-        }
-        if ($connected === false) {
-            $connected = $this->redis->connect($this->server_uri, $this->server_port, $this->timeout);
+        try {
+            $result = $this->redis->ping();
+            $connected = ($result == "PONG");
+        } catch (RedisException $e) {
+            error_log("RedisKeyCache: Error communicating with Redis server - " . $e->getMessage());
         }
         return $connected;
     }
@@ -116,8 +88,8 @@ class RedisKeyCache implements IUuidCache
             $hashes = $this->redis->hgetall($txId);
             if ($hashes !== false) {
                 $flipped = array_flip($hashes);
-                if (array_key_exists($path, $hashes)) {
-                    return $hashes[$path];
+                if (array_key_exists($path, $flipped)) {
+                    return $flipped[$path];
                 }
             }
         }
@@ -134,6 +106,9 @@ class RedisKeyCache implements IUuidCache
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function delete($txId)
     {
         if ($this->isConnected()) {

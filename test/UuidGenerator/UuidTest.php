@@ -1,6 +1,6 @@
 <?php
 
-namespace Islandora\Chullo;
+namespace Islandora\Chullo\Uuid;
 
 use Ramsey\Uuid\Uuid;
 use Islandora\Chullo\Uuid\UuidGenerator;

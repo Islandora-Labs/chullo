@@ -40,7 +40,7 @@ interface IUuidCache
      * @var string $txID
      *   The transaction ID.
      * @var string $uuid
-     *   The UUID 
+     *   The UUID
      * @return string
      *   The UUID corresponding to the path in the transaction.
      */

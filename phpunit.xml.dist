@@ -8,5 +8,8 @@
         <testsuite name="uuid">
             <directory>test/UuidGenerator</directory>
         </testsuite>
+        <testsuite name="cache">
+            <directory>test/KeyCache</directory>
+        </testsuite>
     </testsuites>
 </phpunit>
