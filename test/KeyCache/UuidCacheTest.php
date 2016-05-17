@@ -17,7 +17,7 @@ class UuidCacheTest extends \PHPUnit_Framework_TestCase
     {
         $this->redis = \Mockery::mock('\Redis');
         $this->redis->shouldReceive('expire')->andReturn(1);
-        $this->redis->shouldReceive('ping')->andReturn("PONG");
+        $this->redis->shouldReceive('ping')->andReturn("+PONG");
         $this->redis->shouldReceive('close')->andReturn(null);
 
         $this->uuid_gen = new UuidGenerator(); 
