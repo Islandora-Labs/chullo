@@ -42,7 +42,7 @@ interface IUuidCache
      * @var string $uuid
      *   The UUID
      * @return string
-     *   The UUID corresponding to the path in the transaction.
+     *   The UUID corresponding to the path in the transaction or NULL
      */
     public function getByUuid($txID, $uuid);
 
@@ -54,7 +54,7 @@ interface IUuidCache
      * @var string $path
      *   The key.
      * @return string
-     *   The UUID corresponding to the path in the transaction.
+     *   The UUID corresponding to the path in the transaction or NULL
      */
     public function getByPath($txID, $path);
 

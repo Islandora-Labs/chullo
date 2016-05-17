@@ -28,14 +28,50 @@ class RedisKeyCache implements IUuidCache
      *   Are we connected to the Redis server yet.
      */
     private $connected = false;
+    /**
+     * @var string $host
+     *   The hostname of the redis server.
+     */
+    private $host;
+    /**
+     * @var int $port
+     *   The port of the redis server.
+     */
+    private $port;
   
     /**
      * @param \Redis $instance
      *   An instance of the Redis client
      */
-    public function __construct(\Redis $instance)
+    public function __construct(\Redis $instance, $host, $port)
     {
         $this->redis = $instance;
+        $this->redis->host = $host;
+        $this->redis->port = $port;
+    }
+    
+    /**
+     *
+     */
+    public function __destruct()
+    {
+        $this->redis->close();
+    }
+    
+    /**
+     * Create using a hostname and port.
+     *
+     * @param $host
+     *   The hostname of the redis server
+     * @param $port
+     *   The port of the redis server
+     * @return RedisKeyCache
+     */
+    public static function create($host = "localhost", $port = 6379)
+    {
+        $redis = new \Redis();
+        $redis->connect($host, $port);
+        return new RedisKeyCache($redis, $host, $port);
     }
   
     /**
@@ -47,9 +83,13 @@ class RedisKeyCache implements IUuidCache
     {
         try {
             $result = $this->redis->ping();
-            $connected = ($result == "PONG");
+            $connected = ($result == "+PONG");
         } catch (RedisException $e) {
             error_log("RedisKeyCache: Error communicating with Redis server - " . $e->getMessage());
+            # Try connecting once more.
+            $this->redis->connect($this->host, $this->port);
+            $result = $this->redis->ping();
+            $connected = ($result == "+PONG");
         }
         return $connected;
     }
@@ -66,6 +106,9 @@ class RedisKeyCache implements IUuidCache
             }
             return $result;
         }
+        /**
+         * TODO: return exceptions??
+         */
         return false;
     }
 
