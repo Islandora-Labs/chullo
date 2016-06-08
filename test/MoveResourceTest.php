@@ -58,6 +58,6 @@ class MoveResourceTest extends \PHPUnit_Framework_TestCase
   
         //502
         $result = $client->moveResource("", "");
-        $this->assertNull($result); 
+        $this->assertNull($result);
     }
 }
