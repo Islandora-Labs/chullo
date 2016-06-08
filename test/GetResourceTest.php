@@ -66,10 +66,10 @@ class GetResourceTest extends \PHPUnit_Framework_TestCase
 
         //304
         $result = $client->getResource("");
-        $this->assertFalse($result);
+        $this->assertNull($result);
 
         //404
         $result = $client->getResource("");
-        $this->assertFalse($result);
+        $this->assertNull($result);
     }
 }
