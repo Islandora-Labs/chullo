@@ -34,6 +34,9 @@ class Chullo implements IFedoraClient
 
     protected $api; // IFedoraApi
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __construct(IFedoraApi $api)
     {
         $this->api = $api;
@@ -53,6 +56,10 @@ class Chullo implements IFedoraClient
     public function getBaseUri()
     {
         return $this->api->getBaseUri();
+        
+        if ($response->getStatusCode() != 200) {
+            return null;
+        }
     }
 
     /**
