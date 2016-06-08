@@ -30,4 +30,12 @@ class CreateTransactionTest extends \PHPUnit_Framework_TestCase
         $result = $client->createTransaction();
         $this->assertSame($result, "tx:abc-123");
     }
+    /**
+     * @covers  Islandora\Chullo\Chullo::createTransaction
+     */
+    public function testReturnsEmpty()
+    {
+        $uri = '';
+        $this->assertEmpty($uri);
+    }
 }
