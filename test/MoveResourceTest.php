@@ -48,9 +48,16 @@ class MoveResourceTest extends \PHPUnit_Framework_TestCase
         $api = new FedoraApi($guzzle);
         $client = new Chullo($api);
 
-        foreach ($mock as $response) {
-            $result = $client->moveResource("", "");
-            $this->assertNull($result);
-        }
+        //404
+        $result = $client->moveResource("", "");
+        $this->assertNull($result);
+  
+        //409
+        $result = $client->moveResource("", "");
+        $this->assertNull($result);
+  
+        //502
+        $result = $client->moveResource("", "");
+        $this->assertNull($result); 
     }
 }

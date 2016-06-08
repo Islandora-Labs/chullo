@@ -64,9 +64,12 @@ class GetResourceTest extends \PHPUnit_Framework_TestCase
         $api = new FedoraApi($guzzle);
         $client = new Chullo($api);
 
-        foreach ($mock as $response) {
-            $result = $client->getResource("");
-            $this->assertFalse($result);
-        }
+        //304
+        $result = $client->getResource("");
+        $this->assertFalse($result);
+
+        //404
+        $result = $client->getResource("");
+        $this->assertFalse($result);
     }
 }
