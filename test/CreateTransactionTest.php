@@ -35,7 +35,8 @@ class CreateTransactionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnsEmpty()
     {
-        $uri = '';
+        $uri = NULL;
         $this->assertEmpty($uri);
+        $this->assertNull($uri);
     }
 }
