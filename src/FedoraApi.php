@@ -36,11 +36,17 @@ class FedoraApi implements IFedoraApi
 
     protected $client;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function create($fedora_rest_url)
     {
         $guzzle = new Client(['base_uri' => $fedora_rest_url]);
