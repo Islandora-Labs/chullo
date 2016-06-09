@@ -24,6 +24,9 @@ class TriplestoreClient implements ITriplestoreClient
 
     protected $client;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
@@ -35,6 +38,7 @@ class TriplestoreClient implements ITriplestoreClient
      * @param string    $sparql_endpoint    Url for sparql endpoint
      *
      * @return TriplestoreClient
+     * @codeCoverageIgnore
      */
     public static function create($sparql_endpoint)
     {

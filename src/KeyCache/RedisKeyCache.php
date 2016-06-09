@@ -42,6 +42,8 @@ class RedisKeyCache implements IUuidCache
     /**
      * @param \Redis $instance
      *   An instance of the Redis client
+     *
+     * @codeCoverageIgnore
      */
     public function __construct(\Redis $instance, $host, $port)
     {
@@ -51,7 +53,7 @@ class RedisKeyCache implements IUuidCache
     }
     
     /**
-     *
+     * @codeCoverageIgnore
      */
     public function __destruct()
     {
