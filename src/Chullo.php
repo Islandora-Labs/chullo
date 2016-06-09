@@ -56,10 +56,6 @@ class Chullo implements IFedoraClient
     public function getBaseUri()
     {
         return $this->api->getBaseUri();
-        
-        if ($response->getStatusCode() != 200) {
-            return null;
-        }
     }
 
     /**
