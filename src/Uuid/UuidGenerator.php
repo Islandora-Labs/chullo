@@ -18,6 +18,8 @@ class UuidGenerator implements IUuidGenerator
     /**
      * @param string $namespace
      *   The initial namespace for the Uuid Generator.
+     *
+     *  @codeCoverageIgnore
      */
     public function __construct($namespace = null)
     {
