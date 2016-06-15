@@ -41,7 +41,7 @@ class UuidTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($test_uuid->toString(), $uuid5_2, "Did not build the correct UUID v5");
 
         $generator_3 = new UuidGenerator($namespace);
-        $uuid5_3 = $generator2->generateV5($object_name, $namespace);
+        $uuid5_3 = $generator2->generateV5($object_name, $namespace_uuid);
         $this->assertEquals($test_uuid->toString(), $uuid5_3, "Did not build the correct UUID v5");
     }
 }
