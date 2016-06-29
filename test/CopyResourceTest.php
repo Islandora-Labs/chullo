@@ -14,7 +14,7 @@ class CopyResourceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers  Islandora\Chullo\Chullo::copyResource
-     * @covers  Islandora\Chullo\Chullo::copyResource
+     * @covers  Islandora\Chullo\FedoraApi::copyResource
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsUriOn201()
@@ -34,7 +34,7 @@ class CopyResourceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers  Islandora\Chullo\Chullo::copyResource
-     * @covers  Islandora\Chullo\Chullo::copyResource
+     * @covers  Islandora\Chullo\FedoraApi::copyResource
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsNullOtherwise()

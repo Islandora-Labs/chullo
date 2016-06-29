@@ -14,7 +14,7 @@ class RollbackTransactionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers  Islandora\Chullo\Chullo::rollbackTransaction
-     * @covers  Islandora\Chullo\Chullo::rollbackTransaction
+     * @covers  Islandora\Chullo\FedoraApi::rollbackTransaction
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsTrueOn204()
@@ -34,7 +34,7 @@ class RollbackTransactionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers  Islandora\Chullo\Chullo::rollbackTransaction
-     * @covers  Islandora\Chullo\Chullo::rollbackTransaction
+     * @covers  Islandora\Chullo\FedoraApi::rollbackTransaction
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsFalseOtherwise()
