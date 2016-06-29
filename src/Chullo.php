@@ -351,7 +351,7 @@ class Chullo implements IFedoraClient
     /**
      * Creates a new transaction.
      *
-     * @return string   Transaction id or null if failure
+     * @return null|string   Transaction id or null if failure
      */
     public function createTransaction()
     {
