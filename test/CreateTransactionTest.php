@@ -32,11 +32,21 @@ class CreateTransactionTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @covers  Islandora\Chullo\Chullo::createTransaction
+     * @uses    GuzzleHttp\Client
      */
-    public function testReturnsEmpty()
+    public function testReturnsNullOtherwise()
     {
-        $uri = null;
-        $this->assertEmpty($uri);
-        $this->assertNull($uri);
+        $mock = new MockHandler([
+            new Response(404),
+        ]);
+
+        $handler = HandlerStack::create($mock);
+        $guzzle = new Client(['handler' => $handler]);
+        $api = new FedoraApi($guzzle);
+        $client = new Chullo($api);
+
+        //404
+        $result = $client->createTransaction("");
+        $this->assertNull($result);
     }
 }
