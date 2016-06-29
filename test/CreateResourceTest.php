@@ -14,6 +14,7 @@ class CreateResourceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers  Islandora\Chullo\Chullo::createResource
+     * @covers  Islandora\Chullo\FedoraApi::createResource
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsUriOn201()
@@ -32,8 +33,9 @@ class CreateResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers            Islandora\Chullo\Chullo::createResource
-     * @uses              GuzzleHttp\Client
+     * @covers  Islandora\Chullo\Chullo::createResource
+     * @covers  Islandora\Chullo\FedoraApi::createResource
+     * @uses    GuzzleHttp\Client
      */
     public function testReturnsNullOtherwise()
     {

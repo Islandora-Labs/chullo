@@ -14,6 +14,7 @@ class ExtendTransactionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers  Islandora\Chullo\Chullo::extendTransaction
+     * @covers  Islandora\Chullo\Chullo::extendTransaction
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsTrueOn204()
@@ -32,8 +33,9 @@ class ExtendTransactionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers            Islandora\Chullo\Chullo::extendTransaction
-     * @uses              GuzzleHttp\Client
+     * @covers  Islandora\Chullo\Chullo::extendTransaction
+     * @covers  Islandora\Chullo\Chullo::extendTransaction
+     * @uses    GuzzleHttp\Client
      */
     public function testReturnsFalseOtherwise()
     {

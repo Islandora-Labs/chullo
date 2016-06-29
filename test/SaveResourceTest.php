@@ -14,6 +14,7 @@ class SaveResourceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers  Islandora\Chullo\Chullo::saveResource
+     * @covers  Islandora\Chullo\FedoraApi::saveResource
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsTrueOn204()
@@ -32,8 +33,9 @@ class SaveResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers            Islandora\Chullo\Chullo::saveResource
-     * @uses              GuzzleHttp\Client
+     * @covers  Islandora\Chullo\Chullo::saveResource
+     * @covers  Islandora\Chullo\FedoraApi::saveResource
+     * @uses    GuzzleHttp\Client
      */
     public function testReturnsFalseOtherwise()
     {

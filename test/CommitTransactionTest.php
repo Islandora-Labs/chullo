@@ -14,6 +14,7 @@ class CommitTransactionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers  Islandora\Chullo\Chullo::commitTransaction
+     * @covers  Islandora\Chullo\Chullo::commitTransaction
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsTrue204()
@@ -32,8 +33,9 @@ class CommitTransactionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers            Islandora\Chullo\Chullo::commitTransaction
-     * @uses              GuzzleHttp\Client
+     * @covers  Islandora\Chullo\Chullo::commitTransaction
+     * @covers  Islandora\Chullo\Chullo::commitTransaction
+     * @uses    GuzzleHttp\Client
      */
     public function testReturnsFalseOtherwise()
     {

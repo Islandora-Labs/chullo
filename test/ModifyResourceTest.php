@@ -14,6 +14,7 @@ class ModifyResourceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers  Islandora\Chullo\Chullo::modifyResource
+     * @covers  Islandora\Chullo\FedoraApi::modifyResource
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsTrueOn204()
@@ -32,8 +33,9 @@ class ModifyResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers            Islandora\Chullo\Chullo::modifyResource
-     * @uses              GuzzleHttp\Client
+     * @covers  Islandora\Chullo\Chullo::modifyResource
+     * @covers  Islandora\Chullo\FedoraApi::modifyResource
+     * @uses    GuzzleHttp\Client
      */
     public function testReturnsFalseOtherwise()
     {

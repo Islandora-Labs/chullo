@@ -14,6 +14,7 @@ class MoveResourceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers  Islandora\Chullo\Chullo::moveResource
+     * @covers  Islandora\Chullo\Chullo::moveResource
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsUriOn201()
@@ -32,8 +33,9 @@ class MoveResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers            Islandora\Chullo\Chullo::moveResource
-     * @uses              GuzzleHttp\Client
+     * @covers  Islandora\Chullo\Chullo::moveResource
+     * @covers  Islandora\Chullo\Chullo::moveResource
+     * @uses    GuzzleHttp\Client
      */
     public function testReturnsNullOtherwise()
     {
