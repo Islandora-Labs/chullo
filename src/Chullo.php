@@ -12,6 +12,7 @@
  * @package  Islandora
  * @author   Daniel Lamb <daniel@discoverygarden.ca>
  * @author   Nick Ruest <ruestn@gmail.com>
+ * @author   Diego Pino <dpino@metro.org>
  * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GPL
  * @link     http://www.islandora.ca
  */
@@ -322,7 +323,7 @@ class Chullo implements IFedoraClient
      * Issues a MOVE request to Fedora.
      *
      * @param string    $uri            Resource URI
-     * @param array     $destination    Destination URI
+     * @param string    $destination    Destination URI
      * @param string    $transaction    Transaction id
      *
      * @return string   Uri of moved resource or null if failed
