@@ -11,6 +11,7 @@
  * @category Islandora
  * @package  Islandora
  * @author   Daniel Lamb <daniel@discoverygarden.ca>
+ * @author   Nick Ruest <ruestn@gmail.com>
  * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GPL
  * @link     http://www.islandora.ca
  */
@@ -23,6 +24,7 @@ namespace Islandora\Chullo;
  * @category Islandora
  * @package  Islandora
  * @author   Daniel Lamb <daniel@discoverygarden.ca>
+ * @author   Diego Pino <dpino@metro.org>
  * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GPL
  * @link     http://www.islandora.ca
  */
