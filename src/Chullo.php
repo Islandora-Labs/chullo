@@ -293,7 +293,7 @@ class Chullo implements IFedoraClient
      * Issues a COPY request to Fedora.
      *
      * @param string    $uri            Resource URI
-     * @param array     $destination    Destination URI
+     * @param string    $destination    Destination URI
      * @param string    $transaction    Transaction id
      *
      * @return string   Uri of newly created copy or null if failed
