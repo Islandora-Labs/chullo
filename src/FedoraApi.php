@@ -313,7 +313,7 @@ class FedoraApi implements IFedoraApi
      * Issues a COPY request to Fedora.
      *
      * @param string    $uri            Resource URI
-     * @param array     $destination    Destination URI
+     * @param string    $destination    Destination URI
      * @param string    $transaction    Transaction id
      *
      * @return ResponseInterface
@@ -346,7 +346,7 @@ class FedoraApi implements IFedoraApi
      * Issues a MOVE request to Fedora.
      *
      * @param string    $uri            Resource URI
-     * @param array     $destination    Destination URI
+     * @param string    $destination    Destination URI
      * @param string    $transaction    Transaction id
      *
      * @return ResponseInterface
