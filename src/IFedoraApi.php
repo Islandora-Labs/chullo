@@ -75,16 +75,12 @@ interface IFedoraApi
      * @param string    $content              String or binary content
      * @param array     $headers              HTTP Headers
      * @param string    $transaction          Transaction id
-     * @param string    $checksum_algorithm   Checksum algorithm
-     * @param string    $checksum_value       Checksum value
      */
     public function createResource(
         $uri = "",
         $content = null,
         $headers = [],
-        $transaction = "",
-        $checksum_value = "",
-        $checksum_algorithm = "sha1"
+        $transaction = ""
     );
 
     /**
@@ -94,16 +90,12 @@ interface IFedoraApi
      * @param string    $content              String or binary content
      * @param array     $headers              HTTP Headers
      * @param string    $transaction          Transaction id
-     * @param string    $checksum_algorithm   Checksum algorithm
-     * @param string    $checksum_value       Checksum value
      */
     public function saveResource(
         $uri,
         $content = null,
         $headers = [],
-        $transaction = "",
-        $checksum_value = "",
-        $checksum_algorithm = "sha1"
+        $transaction = ""
     );
 
     /**

@@ -157,8 +157,6 @@ class Chullo implements IFedoraClient
      * @param string    $content              String or binary content
      * @param array     $headers              HTTP Headers
      * @param string    $transaction          Transaction id
-     * @param string    $checksum_algorithm   Checksum algorithm
-     * @param string    $checksum_value       Checksum value
      *
      * @return string   Uri of newly created resource or null if failed
      */
@@ -166,17 +164,13 @@ class Chullo implements IFedoraClient
         $uri = "",
         $content = null,
         $headers = [],
-        $transaction = "",
-        $checksum_value = "",
-        $checksum_algorithm = "sha1"
+        $transaction = ""
     ) {
         $response = $this->api->createResource(
             $uri,
             $content,
             $headers,
-            $transaction,
-            $checksum_value,
-            $checksum_algorithm
+            $transaction
         );
 
         if ($response->getStatusCode() != 201) {
@@ -195,8 +189,6 @@ class Chullo implements IFedoraClient
      * @param string    $content              String or binary content
      * @param array     $headers              HTTP Headers
      * @param string    $transaction          Transaction id
-     * @param string    $checksum_algorithm   Checksum algorithm
-     * @param string    $checksum_value       Checksum value
      *
      * @return boolean  True if successful
      */
@@ -204,17 +196,13 @@ class Chullo implements IFedoraClient
         $uri,
         $content = null,
         $headers = [],
-        $transaction = "",
-        $checksum_value = "",
-        $checksum_algorithm = "sha1"
+        $transaction = ""
     ) {
         $response = $this->api->saveResource(
             $uri,
             $content,
             $headers,
-            $transaction,
-            $checksum_value,
-            $checksum_algorithm
+            $transaction
         );
 
         return $response->getStatusCode() == 204;
@@ -244,9 +232,11 @@ class Chullo implements IFedoraClient
         return $this->saveResource(
             $uri,
             $turtle,
-            ['Content-Type' => 'text/turtle'],
-            $transaction,
-            $checksum_value
+            [
+              'Content-Type' => 'text/turtle',
+              'digest' => 'sha1='.$checksum_value
+            ],
+            $transaction
         );
     }
 
