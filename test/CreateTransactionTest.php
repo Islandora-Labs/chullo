@@ -16,6 +16,9 @@ class CreateTransactionTest extends \PHPUnit_Framework_TestCase
      * @covers  Islandora\Chullo\Chullo::createTransaction
      * @covers  Islandora\Chullo\FedoraApi::createTransaction
      * @covers  Islandora\Chullo\FedoraApi::prepareUri
+     * @covers  Islandora\Chullo\FedoraApi::baseUri
+     * @covers  Islandora\Chullo\FedoraApi::createTransaction
+     * @covers  Islandora\Chullo\FedoraApi::generateTransaction
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsIdOn201()
@@ -36,6 +39,9 @@ class CreateTransactionTest extends \PHPUnit_Framework_TestCase
      * @covers  Islandora\Chullo\Chullo::createTransaction
      * @covers  Islandora\Chullo\FedoraApi::createTransaction
      * @covers  Islandora\Chullo\FedoraApi::prepareUri
+     * @covers  Islandora\Chullo\FedoraApi::baseUri
+     * @covers  Islandora\Chullo\FedoraApi::createTransaction
+     * @covers  Islandora\Chullo\FedoraApi::generateTransaction
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsNullOtherwise()
