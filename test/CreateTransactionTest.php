@@ -14,6 +14,7 @@ class CreateTransactionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers  Islandora\Chullo\Chullo::createTransaction
+     * @covers  Islandora\Chullo\Chullo::getBaseUri
      * @covers  Islandora\Chullo\FedoraApi::createTransaction
      * @covers  Islandora\Chullo\FedoraApi::prepareUri
      * @covers  Islandora\Chullo\FedoraApi::getBaseUri
@@ -37,6 +38,7 @@ class CreateTransactionTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @covers  Islandora\Chullo\Chullo::createTransaction
+     * @covers  Islandora\Chullo\Chullo::getBaseUri
      * @covers  Islandora\Chullo\FedoraApi::createTransaction
      * @covers  Islandora\Chullo\FedoraApi::prepareUri
      * @covers  Islandora\Chullo\FedoraApi::getBaseUri
