@@ -48,7 +48,7 @@ class CreateTransactionTest extends \PHPUnit_Framework_TestCase
         $client = new Chullo($api);
 
         //404
-        $result = $client->createResource();
+        $result = $client->createTransaction();
         $this->assertNull($result);
     }
 }
