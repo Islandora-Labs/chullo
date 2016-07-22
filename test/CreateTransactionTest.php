@@ -43,7 +43,7 @@ class CreateTransactionTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
+        $guzzle = new Client(['handler' => $handler, 'base_uri' => 'http://localhost:8080/fcrepo/rest']);
         $api = new FedoraApi($guzzle);
         $client = new Chullo($api);
 
