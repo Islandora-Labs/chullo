@@ -26,7 +26,6 @@ class CreateTransactionTest extends \PHPUnit_Framework_TestCase
     {
         $mock = new MockHandler([
             new Response(201, ['Location' => "http://localhost:8080/fcrepo/rest/tx:abc-123"]),
-            new Response(201, ['Location' => "http://localhost:8080/fcrepo/rest/tx:abc-123"]),
         ]);
 
         $handler = HandlerStack::create($mock);
@@ -35,9 +34,6 @@ class CreateTransactionTest extends \PHPUnit_Framework_TestCase
         $client = new Chullo($api);
 
         $this->assertEquals($client->getBaseUri(), 'http://localhost:8080/fcrepo/rest');
-
-        $result = $client->createResource();
-        $this->assertSame($result, 'http://localhost:8080/fcrepo/rest/tx:abc-123');
 
         $result = $client->createTransaction();
         $this->assertSame($result, "tx:abc-123");
