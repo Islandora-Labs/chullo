@@ -115,7 +115,7 @@ foreach ($results as $triple) {
 
 Current maintainers:
 
-* [Daniel Lamb](https://github.com/daniel-dgi)
+* [Daniel Lamb](https://github.com/dannylamb)
 * [Nick Ruest](https://github.com/ruebot)
 
 ## Development
