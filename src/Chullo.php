@@ -10,10 +10,10 @@
  *
  * @category Islandora
  * @package  Islandora
- * @author   Daniel Lamb <daniel@discoverygarden.ca>
+ * @author   Daniel Lamb <dlamb@islandora.ca>
  * @author   Nick Ruest <ruestn@gmail.com>
  * @author   Diego Pino <dpino@metro.org>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GPL
+ * @license  https://opensource.org/licenses/MIT MIT
  * @link     http://www.islandora.ca
  */
 
@@ -23,12 +23,6 @@ use GuzzleHttp\Client;
 
 /**
  * Default implementation of IFedoraClient
- *
- * @category Islandora
- * @package  Islandora
- * @author   Daniel Lamb <daniel@discoverygarden.ca>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GPL
- * @link     http://www.islandora.ca
  */
 class Chullo implements IFedoraClient
 {

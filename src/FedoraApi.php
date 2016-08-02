@@ -10,11 +10,11 @@
  *
  * @category Islandora
  * @package  Islandora
- * @author   Daniel Lamb <daniel@discoverygarden.ca>
+ * @author   Daniel Lamb <dlamb@islandora.ca>
  * @author   Nick Ruest <ruestn@gmail.com>
  * @author   Jared Whiklo <Jared.Whiklo@umanitoba.ca>
  * @author   Diego Pino <dpino@metro.org>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GPL
+ * @license  https://opensource.org/licenses/MIT MIT
  * @link     http://www.islandora.ca
  */
 
@@ -26,15 +26,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Default implementation of IFedoraApi using Guzzle.
- *
- * @category Islandora
- * @package  Islandora
- * @author   Daniel Lamb <daniel@discoverygarden.ca>
- * @author   Nick Ruest <ruestn@gmail.com>
- * @author   Jared Whiklo <Jared.Whiklo@umanitoba.ca>
- * @author   Diego Pino <dpino@metro.org>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GPL
- * @link     http://www.islandora.ca
  */
 class FedoraApi implements IFedoraApi
 {

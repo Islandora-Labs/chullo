@@ -7,6 +7,7 @@ Chullo is a PHP client for [Fedora 4](http://fedorarepository.org/) built using 
 [![Downloads](https://img.shields.io/packagist/dt/islandora/chullo.svg?style=flat-square)](https://packagist.org/packages/islandora/chullo)
 [![Build Status](https://travis-ci.org/Islandora-CLAW/chullo.svg?branch=master)](https://travis-ci.org/Islandora-CLAW/chullo)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
+[![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
 [![codecov](https://codecov.io/gh/Islandora-CLAW/chullo/branch/master/graph/badge.svg)](https://codecov.io/gh/Islandora-CLAW/chullo)
 
 ## Requirements
