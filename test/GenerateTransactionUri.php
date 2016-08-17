@@ -14,6 +14,7 @@ class GenerateTransactionUriTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers  Islandora\Chullo\FedoraApi::generateTransactionUri
+     * @covers  Islandora\Chullo\FedoraApi::createTransaction
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsTrueOn204()
@@ -28,11 +29,15 @@ class GenerateTransactionUriTest extends \PHPUnit_Framework_TestCase
         $client = new Chullo($api);
 
         $result = $client->generateTransactionUri("tx:abc-123");
-        $this->assertTrue($resulti, 'http://localhost:8080/fcrepo/tx:abc-123');
+        $this->assertTrue($result, 'http://localhost:8080/fcrepo/tx:abc-123');
+
+        $result = $client->createTransaction();
+        $this->assertTrue('fcr:tx');
     }
 
     /**
      * @covers  Islandora\Chullo\FedoraApi::generateTransactionUri
+     * @covers  Islandora\Chullo\FedoraApi::createTransaction
      * @uses    GuzzleHttp\Client
      */
     public function testReturnsFalseOtherwise()
