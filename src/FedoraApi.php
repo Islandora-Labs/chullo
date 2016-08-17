@@ -253,6 +253,14 @@ class FedoraApi implements IFedoraApi
         );
     }
 
+    /**
+     * Prepares a URI for related transaction functions.
+     *
+     * @param string    $uri            Resource URI
+     * @param string    $transaction    Transaction id
+     *
+     * @return ResponseInterface
+     */
     protected function prepareUri($uri, $transaction = "")
     {
         $base_uri = rtrim($this->getBaseUri(), '/');
@@ -417,6 +425,13 @@ class FedoraApi implements IFedoraApi
         );
     }
 
+    /**
+     * Generates a transaction URI.
+     *
+     * @param string    $id Transaction id
+     *
+     * @return ResponseInterface
+     */
     protected function generateTransactionUri($id)
     {
         $base = rtrim($this->getBaseUri(), '/');
