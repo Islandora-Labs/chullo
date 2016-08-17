@@ -28,7 +28,7 @@ class GenerateTransactionUriTest extends \PHPUnit_Framework_TestCase
         $client = new Chullo($api);
 
         $result = $client->generateTransactionUri("tx:abc-123");
-        $this->assertTrue($result);
+        $this->assertTrue($resulti, 'http://localhost:8080/fcrepo/tx:abc-123');
     }
 
     /**
@@ -47,6 +47,6 @@ class GenerateTransactionUriTest extends \PHPUnit_Framework_TestCase
         $client = new Chullo($api);
 
         $result = $client->generateTransactionUri("tx:abc-123");
-        $this->assertFalse($result);
+        $this->assertFalse($result, 'http://localhost:8080/fcrepo/tx:abc-123');
     }
 }
