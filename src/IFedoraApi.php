@@ -38,22 +38,18 @@ interface IFedoraApi
      *
      * @param string    $uri            Resource URI
      * @param array     $headers        HTTP Headers
-     * @param string    $transaction    Transaction id
      */
     public function getResource(
         $uri = "",
-        $headers = [],
-        $transaction = ""
+        $headers = []
     );
     /**
      * Gets a Fedora resoure's headers.
      *
      * @param string    $uri            Resource URI
-     * @param string    $transaction    Transaction id
      */
     public function getResourceHeaders(
-        $uri = "",
-        $transaction = ""
+        $uri = ""
     );
     /**
      * Gets information about the supported HTTP methods, etc., for a Fedora resource.
@@ -68,13 +64,11 @@ interface IFedoraApi
      * @param string    $uri                  Resource URI
      * @param string    $content              String or binary content
      * @param array     $headers              HTTP Headers
-     * @param string    $transaction          Transaction id
      */
     public function createResource(
         $uri = "",
         $content = null,
-        $headers = [],
-        $transaction = ""
+        $headers = []
     );
 
     /**
@@ -83,13 +77,11 @@ interface IFedoraApi
      * @param string    $uri                  Resource URI
      * @param string    $content              String or binary content
      * @param array     $headers              HTTP Headers
-     * @param string    $transaction          Transaction id
      */
     public function saveResource(
         $uri,
         $content = null,
-        $headers = [],
-        $transaction = ""
+        $headers = []
     );
 
     /**
@@ -98,23 +90,19 @@ interface IFedoraApi
      * @param string    $uri            Resource URI
      * @param string    $sparql         SPARQL Update query
      * @param array     $headers        HTTP Headers
-     * @param string    $transaction    Transaction id
      */
     public function modifyResource(
         $uri,
         $sparql = "",
-        $headers = [],
-        $transaction = ""
+        $headers = []
     );
 
     /**
      * Issues a DELETE request to Fedora.
      *
      * @param string    $uri            Resource URI
-     * @param string    $transaction    Transaction id
      */
     public function deleteResource(
-        $uri,
-        $transaction = ""
+        $uri
     );
 }

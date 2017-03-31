@@ -64,20 +64,15 @@ class FedoraApi implements IFedoraApi
      *
      * @param string    $uri            Resource URI
      * @param array     $headers        HTTP Headers
-     * @param string    $transaction    Transaction id
      *
      * @return ResponseInterface
      */
     public function getResource(
         $uri = "",
-        $headers = [],
-        $transaction = ""
+        $headers = []
     ) {
         // Set headers
         $options = ['http_errors' => false, 'headers' => $headers];
-
-        // Ensure uri takes transaction into account.
-        $uri = $this->prepareUri($uri, $transaction);
 
         // Send the request.
         return $this->client->request(
@@ -91,17 +86,12 @@ class FedoraApi implements IFedoraApi
      * Gets a Fedora resoure's headers.
      *
      * @param string    $uri            Resource URI
-     * @param string    $transaction    Transaction id
      *
      * @return ResponseInterface
      */
     public function getResourceHeaders(
-        $uri = "",
-        $transaction = ""
+        $uri = ""
     ) {
-
-        // Ensure uri takes transaction into account.
-        $uri = $this->prepareUri($uri, $transaction);
 
         // Send the request.
         return $this->client->request(
@@ -133,15 +123,13 @@ class FedoraApi implements IFedoraApi
      * @param string    $uri                  Resource URI
      * @param string    $content              String or binary content
      * @param array     $headers              HTTP Headers
-     * @param string    $transaction          Transaction id
      *
      * @return ResponseInterface
      */
     public function createResource(
         $uri = "",
         $content = null,
-        $headers = [],
-        $transaction = ""
+        $headers = []
     ) {
         $options = ['http_errors' => false];
 
@@ -150,10 +138,7 @@ class FedoraApi implements IFedoraApi
 
         // Set headers.
         $options['headers'] = $headers;
-
-        // Ensure uri takes transaction into account.
-        $uri = $this->prepareUri($uri, $transaction);
-
+        
         return $this->client->request(
             'POST',
             $uri,
@@ -167,15 +152,13 @@ class FedoraApi implements IFedoraApi
      * @param string    $uri                  Resource URI
      * @param string    $content              String or binary content
      * @param array     $headers              HTTP Headers
-     * @param string    $transaction          Transaction id
      *
      * @return ResponseInterface
      */
     public function saveResource(
         $uri,
         $content = null,
-        $headers = [],
-        $transaction = ""
+        $headers = []
     ) {
         $options = ['http_errors' => false];
 
@@ -184,9 +167,6 @@ class FedoraApi implements IFedoraApi
 
         // Set headers.
         $options['headers'] = $headers;
-
-        // Ensure uri takes transaction into account.
-        $uri = $this->prepareUri($uri, $transaction);
 
         return $this->client->request(
             'PUT',
@@ -201,15 +181,13 @@ class FedoraApi implements IFedoraApi
      * @param string    $uri            Resource URI
      * @param string    $sparql         SPARQL Update query
      * @param array     $headers        HTTP Headers
-     * @param string    $transaction    Transaction id
      *
      * @return ResponseInterface
      */
     public function modifyResource(
         $uri,
         $sparql = "",
-        $headers = [],
-        $transaction = ""
+        $headers = []
     ) {
         $options = ['http_errors' => false];
 
@@ -220,8 +198,6 @@ class FedoraApi implements IFedoraApi
         $options['headers'] = $headers;
         $options['headers']['content-type'] = 'application/sparql-update';
 
-        // Ensure uri takes transaction into account.
-        $uri = $this->prepareUri($uri, $transaction);
         return $this->client->request(
             'PATCH',
             $uri,
@@ -233,56 +209,18 @@ class FedoraApi implements IFedoraApi
      * Issues a DELETE request to Fedora.
      *
      * @param string    $uri            Resource URI
-     * @param string    $transaction    Transaction id
      *
      * @return ResponseInterface
      */
     public function deleteResource(
-        $uri,
-        $transaction = ""
+        $uri
     ) {
         $options = ['http_errors' => false];
-
-        // Ensure uri takes transaction into account.
-        $uri = $this->prepareUri($uri, $transaction);
 
         return $this->client->request(
             'DELETE',
             $uri,
             $options
         );
-    }
-
-    protected function prepareUri($uri, $transaction = "")
-    {
-        $base_uri = rtrim($this->getBaseUri(), '/');
-
-        if (empty($uri)) {
-            return "$base_uri/$transaction";
-        }
-
-        if (strpos($uri, $base_uri) !== 0) {
-            $uri = $base_uri . '/' . ltrim($uri, '/');
-        }
-
-        $uri = rtrim($uri, '/');
-
-        if (strcmp($uri, $base_uri) == 0) {
-            return "$base_uri/$transaction";
-        }
-
-        if (empty($transaction)) {
-            return $uri;
-        }
-
-        $exploded = explode($base_uri, $uri);
-        $relative_path = ltrim($exploded[1], '/');
-        $exploded = explode('/', $relative_path);
-
-        if (in_array($transaction, $exploded)) {
-            return $uri;
-        }
-
-        return implode([$base_uri, $transaction, $relative_path], '/');
     }
 }

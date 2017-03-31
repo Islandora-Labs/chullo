@@ -29,14 +29,12 @@ interface IFedoraClient extends IFedoraApi
      *
      * @param string    $uri            Resource URI
      * @param array     $headers        HTTP Headers
-     * @param string    $transaction    Transaction id
      *
      * @return EasyRdf_Graph
      */
     public function getGraph(
         $uri = "",
-        $headers = [],
-        $transaction = ""
+        $headers = []
     );
 
     /**
@@ -44,13 +42,11 @@ interface IFedoraClient extends IFedoraApi
      *
      * @param string            $uri            Resource URI
      * @param EasyRdf_Resource  $rdf            RDF to save
-     * @param string            $transaction    Transaction id
      *
      * @return null
      */
     public function saveGraph(
         $uri,
-        \EasyRdf_Graph $graph,
-        $transaction = ""
+        \EasyRdf_Graph $graph
     );
 }
