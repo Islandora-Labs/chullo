@@ -42,11 +42,13 @@ interface IFedoraClient extends IFedoraApi
      *
      * @param string            $uri            Resource URI
      * @param EasyRdf_Resource  $rdf            RDF to save
+     * @param array     $headers        HTTP Headers
      *
      * @return null
      */
     public function saveGraph(
         $uri,
-        \EasyRdf_Graph $graph
+        \EasyRdf_Graph $graph,
+        $headers = []
     );
 }

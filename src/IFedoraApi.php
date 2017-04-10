@@ -23,7 +23,7 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * Interface for Fedora interaction.  All functions return a PSR-7 response.
-  */
+ */
 interface IFedoraApi
 {
     /**
@@ -43,20 +43,28 @@ interface IFedoraApi
         $uri = "",
         $headers = []
     );
+
     /**
      * Gets a Fedora resoure's headers.
      *
      * @param string    $uri            Resource URI
+     * @param array     $headers        HTTP Headers
      */
     public function getResourceHeaders(
-        $uri = ""
+        $uri = "",
+        $headers = []
     );
+
     /**
      * Gets information about the supported HTTP methods, etc., for a Fedora resource.
      *
      * @param string    $uri            Resource URI
+     * @param array     $headers        HTTP Headers
      */
-    public function getResourceOptions($uri = "");
+    public function getResourceOptions(
+        $uri = "",
+        $headers = []
+    );
 
     /**
      * Creates a new resource in Fedora.
@@ -101,8 +109,10 @@ interface IFedoraApi
      * Issues a DELETE request to Fedora.
      *
      * @param string    $uri            Resource URI
+     * @param array     $headers        HTTP Headers
      */
     public function deleteResource(
-        $uri
+        $uri = "",
+        $headers = []
     );
 }

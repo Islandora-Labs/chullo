@@ -80,14 +80,17 @@ class Chullo implements IFedoraClient
      * Gets a Fedora resource's headers.
      *
      * @param string    $uri            Resource URI
+     * @param array     $headers        HTTP Headers
      *
      * @return array    Headers of a resource, null on failure
      */
     public function getResourceHeaders(
-        $uri = ""
+        $uri = "",
+        $headers = []
     ) {
         $response = $this->api->getResourceHeaders(
-            $uri
+            $uri,
+            $headers
         );
 
         if ($response->getStatusCode() != 200) {
@@ -101,13 +104,17 @@ class Chullo implements IFedoraClient
      * Gets information about the supported HTTP methods, etc., for a Fedora resource.
      *
      * @param string    $uri            Resource URI
+     * @param array     $headers        HTTP Headers
      *
      * @return string   Options of a resource.
      */
-    public function getResourceOptions($uri = "")
-    {
+    public function getResourceOptions(
+        $uri = "",
+        $headers = []
+    ) {
         $response = $this->api->getResourceOptions(
-            $uri
+            $uri,
+            $headers
         );
 
         return $response->getHeaders();
@@ -193,12 +200,14 @@ class Chullo implements IFedoraClient
      *
      * @param string            $uri            Resource URI
      * @param EasyRdf_Resource  $graph          Graph to save
+     * @param array             $headers        HTTP Headers
      *
      * @return boolean  True if successful
      */
     public function saveGraph(
         $uri,
-        \EasyRdf_Graph $graph
+        \EasyRdf_Graph $graph,
+        $headers = []
     ) {
         // Serialze the rdf.
         $turtle = $graph->serialise('turtle');
@@ -206,14 +215,15 @@ class Chullo implements IFedoraClient
         // Checksum it.
         $checksum_value = sha1($turtle);
 
+        // Set headers.
+        $headers['Content-Type' => 'text/turtle'];
+        $headers['digest' => 'sha1='.$checksum_value];
+
         // Save it.
         return $this->saveResource(
             $uri,
             $turtle,
-            [
-              'Content-Type' => 'text/turtle',
-              'digest' => 'sha1='.$checksum_value
-            ]
+            $headers
         );
     }
 
@@ -244,14 +254,17 @@ class Chullo implements IFedoraClient
      * Issues a DELETE request to Fedora.
      *
      * @param string    $uri            Resource URI
+     * @param array     $headers        HTTP Headers
      *
      * @return boolean  True if successful
      */
     public function deleteResource(
-        $uri
+        $uri,
+        $headers = []
     ) {
         $response = $this->api->deleteResource(
-            $uri
+            $uri,
+            $headers
         );
 
         return $response->getStatusCode() == 204;

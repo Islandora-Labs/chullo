@@ -86,18 +86,20 @@ class FedoraApi implements IFedoraApi
      * Gets a Fedora resoure's headers.
      *
      * @param string    $uri            Resource URI
+     * @param array     $headers        HTTP Headers
      *
      * @return ResponseInterface
      */
     public function getResourceHeaders(
-        $uri = ""
+        $uri = "",
+        $headers = []
     ) {
 
         // Send the request.
         return $this->client->request(
             'HEAD',
             $uri,
-            ['http_errors' => false]
+            ['http_errors' => false, 'headers' => $headers]
         );
     }
 
@@ -105,15 +107,18 @@ class FedoraApi implements IFedoraApi
      * Gets information about the supported HTTP methods, etc., for a Fedora resource.
      *
      * @param string    $uri            Resource URI
+     * @param array     $headers        HTTP Headers
      *
      * @return ResponseInterface
      */
-    public function getResourceOptions($uri = "")
-    {
+    public function getResourceOptions(
+        $uri = "",
+        $headers = []
+    ) {
         return $this->client->request(
             'OPTIONS',
             $uri,
-            ['http_errors' => false]
+            ['http_errors' => false, 'headers' => $headers]
         );
     }
 
@@ -138,7 +143,7 @@ class FedoraApi implements IFedoraApi
 
         // Set headers.
         $options['headers'] = $headers;
-        
+
         return $this->client->request(
             'POST',
             $uri,
@@ -209,13 +214,15 @@ class FedoraApi implements IFedoraApi
      * Issues a DELETE request to Fedora.
      *
      * @param string    $uri            Resource URI
+     * @param array     $headers        HTTP Headers
      *
      * @return ResponseInterface
      */
     public function deleteResource(
-        $uri
+        $uri,
+        $headers = []
     ) {
-        $options = ['http_errors' => false];
+        $options = ['http_errors' => false, 'headers' => $headers];
 
         return $this->client->request(
             'DELETE',
