@@ -4,7 +4,7 @@
     "type": "library",
     "homepage": "https://github.com/islandora-claw/chullo",
     "support": {
-        "issues": "https://github.com/islandora-claw/chullo/issues",
+        "issues": "https://github.com/islandora-claw/CLAW/issues",
         "irc": "irc://irc.freenode.net/islandora"
     },
     "require": {
