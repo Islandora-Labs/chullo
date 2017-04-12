@@ -39,9 +39,9 @@ You can also install with composer by pointing to your local clone. Just add the
 
 Then just `php composer.phar install` as usual.
 
-##Usage
+## Usage
 
-###Fedora
+### Fedora
 ```php
 use Islandora\Chullo\Chullo;
 
