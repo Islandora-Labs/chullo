@@ -45,7 +45,9 @@ class FedoraApi implements IFedoraApi
      */
     public static function create($fedora_rest_url)
     {
-        $guzzle = new Client(['base_uri' => $fedora_rest_url]);
+        $normalized = rtrim($fedora_rest_url);
+        $normalized = rtrim($normalized, '/') . '/';
+        $guzzle = new Client(['base_uri' => $normalized]);
         return new static($guzzle);
     }
 
@@ -219,7 +221,7 @@ class FedoraApi implements IFedoraApi
      * @return ResponseInterface
      */
     public function deleteResource(
-        $uri,
+        $uri = '',
         $headers = []
     ) {
         $options = ['http_errors' => false, 'headers' => $headers];

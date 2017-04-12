@@ -216,8 +216,8 @@ class Chullo implements IFedoraClient
         $checksum_value = sha1($turtle);
 
         // Set headers.
-        $headers['Content-Type' => 'text/turtle'];
-        $headers['digest' => 'sha1='.$checksum_value];
+        $headers['Content-Type'] = 'text/turtle';
+        $headers['digest'] = 'sha1=' . $checksum_value;
 
         // Save it.
         return $this->saveResource(
@@ -259,7 +259,7 @@ class Chullo implements IFedoraClient
      * @return boolean  True if successful
      */
     public function deleteResource(
-        $uri,
+        $uri = '',
         $headers = []
     ) {
         $response = $this->api->deleteResource(
