@@ -14,9 +14,20 @@
         "ml/json-ld": "^1.0.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8",
-        "squizlabs/php_codesniffer": "^2.0@dev",
+        "phpunit/phpunit": "^5.0",
+        "squizlabs/php_codesniffer": "^2.0",
+        "sebastian/phpcpd": "^3.0",
         "mockery/mockery": "^0.9"
+    },
+    "scripts": {
+        "check": [
+            "phpcs --standard=PSR2 src test",
+            "phpcpd --names *.php src test"
+        ],
+        "test": [
+            "@check",
+            "phpunit"
+        ]
     },
     "license": "MIT",
     "authors": [
