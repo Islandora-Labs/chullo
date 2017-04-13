@@ -3,7 +3,7 @@
 Chullo is a PHP client for [Fedora](http://fedorarepository.org/) built using [Guzzle](http://guzzlephp.org) and [EasyRdf](http://www.easyrdf.org/).
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/Islandora/chullo.svg?style=flat-square)](https://packagist.org/packages/islandora/chullo)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.5-8892BF.svg?style=flat-square)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://php.net/)
 [![Downloads](https://img.shields.io/packagist/dt/islandora/chullo.svg?style=flat-square)](https://packagist.org/packages/islandora/chullo)
 [![Build Status](https://travis-ci.org/Islandora-CLAW/chullo.svg?branch=master)](https://travis-ci.org/Islandora-CLAW/chullo)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
@@ -60,30 +60,6 @@ $graph->set($uri, 'dc:title', 'My Sweet Title');
 // Save the graph to Fedora
 $chullo->saveGraph($uri, $graph);
 
-```
-
-### Triplestore
-
-```php
-use Islandora\Chullo\TriplestoreClient;
-
-$triplestore = TriplestoreClient::create('http://127.0.0.1:8080/bigdata/namespace/kb/sparql/');
-
-$sparql = <<<EOD
-    PREFIX fedora: <http://fedora.info/definitions/v4/repository#>
-
-    SELECT ?s
-    WHERE {
-        ?s fedora:hasParent <http://localhost:8080/fcrepo/rest/> .
-    }
-    LIMIT 25
-EOD;
-
-$results = $triplestore->query($sparql);
-
-foreach ($results as $triple) {
-    echo $triple->s . "\n";
-}
 ```
 
 ## Maintainers/Sponsors
