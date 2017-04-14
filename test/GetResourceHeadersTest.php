@@ -31,9 +31,11 @@ class GetResourceHeadersTest extends \PHPUnit_Framework_TestCase
             'Allow' => 'MOVE,COPY,DELETE,POST,HEAD,GET,PUT,PATCH,OPTIONS',
         ];
 
-        $mock = new MockHandler([
-          new Response(200, $headers)
-        ]);
+        $mock = new MockHandler(
+            [
+            new Response(200, $headers)
+            ]
+        );
 
         $handler = HandlerStack::create($mock);
         $guzzle = new Client(['handler' => $handler]);
@@ -54,9 +56,11 @@ class GetResourceHeadersTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnsNullOtherwise()
     {
-        $mock = new MockHandler([
+        $mock = new MockHandler(
+            [
             new Response(404),
-        ]);
+            ]
+        );
 
         $handler = HandlerStack::create($mock);
         $guzzle = new Client(['handler' => $handler]);

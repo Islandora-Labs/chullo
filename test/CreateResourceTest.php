@@ -17,9 +17,11 @@ class CreateResourceTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnsUriOn201()
     {
-        $mock = new MockHandler([
-            new Response(201, ['Location' => "SOME URI"),
-        ]);
+        $mock = new MockHandler(
+            [
+            new Response(201, ['Location' => "SOME URI"]),
+            ]
+        );
 
         $handler = HandlerStack::create($mock);
         $guzzle = new Client(['handler' => $handler]);
@@ -37,10 +39,12 @@ class CreateResourceTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnsNullOtherwise()
     {
-        $mock = new MockHandler([
+        $mock = new MockHandler(
+            [
             new Response(404),
             new Response(409),
-        ]);
+            ]
+        );
 
         $handler = HandlerStack::create($mock);
         $guzzle = new Client(['handler' => $handler]);
