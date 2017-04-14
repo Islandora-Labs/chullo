@@ -32,6 +32,8 @@ class GetResourceTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers  Islandora\Chullo\FedoraApi::getResource
      * @uses    GuzzleHttp\Client
+     *
+     * TODO: Is this useful anymore?
      */
     public function testReturnsNullOtherwise()
     {
@@ -46,10 +48,10 @@ class GetResourceTest extends \PHPUnit_Framework_TestCase
 
         //304
         $result = $api->getResource("");
-        $this->assertNull($result);
+        $this->assertEquals(304, $result->getStatusCode());
 
         //404
         $result = $api->getResource("");
-        $this->assertNull($result);
+        $this->assertEquals(404, $result->getStatusCode());
     }
 }

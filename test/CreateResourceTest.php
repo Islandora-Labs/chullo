@@ -18,7 +18,7 @@ class CreateResourceTest extends \PHPUnit_Framework_TestCase
     public function testReturnsUriOn201()
     {
         $mock = new MockHandler([
-            new Response(201, [], "SOME URI"),
+            new Response(201, ['Location' => "SOME URI"),
         ]);
 
         $handler = HandlerStack::create($mock);
@@ -26,11 +26,14 @@ class CreateResourceTest extends \PHPUnit_Framework_TestCase
         $api = new FedoraApi($guzzle);
 
         $result = $api->createResource("");
-        $this->assertSame((string)$result->getBody(), "SOME URI");
+        $this->assertEquals($result->getHeaderLine("Location"), "SOME URI");
+        $this->assertEquals(201, $result->getStatusCode(), "Expected a 201 response.");
     }
     /**
      * @covers  Islandora\Chullo\FedoraApi::createResource
      * @uses    GuzzleHttp\Client
+     *
+     * TODO: Is this useful anymore?
      */
     public function testReturnsNullOtherwise()
     {
@@ -45,10 +48,10 @@ class CreateResourceTest extends \PHPUnit_Framework_TestCase
 
         // 404
         $result = $api->createResource("");
-        $this->assertSame((string)$result->getStatusCode(), "404");
+        $this->assertEquals(404, $result->getStatusCode());
 
         // 409
         $result = $api->createResource("");
-        $this->assertSame((string)$result->getStatusCode(), "409");
+        $this->assertEquals(409, $result->getStatusCode());
     }
 }

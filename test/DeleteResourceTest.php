@@ -26,12 +26,14 @@ class DeleteResourceTest extends \PHPUnit_Framework_TestCase
         $api = new FedoraApi($guzzle);
 
         $result = $api->deleteResource("");
-        $this->assertTrue($result);
+        $this->assertEquals(204, $result->getStatusCode());
     }
 
     /**
      * @covers  Islandora\Chullo\FedoraApi::deleteResource
      * @uses    GuzzleHttp\Client
+     *
+     * TODO: Is this useful anymore?
      */
     public function testReturnsFalseOtherwise()
     {
@@ -44,6 +46,6 @@ class DeleteResourceTest extends \PHPUnit_Framework_TestCase
         $api = new FedoraApi($guzzle);
 
         $result = $api->deleteResource("");
-        $this->assertFalse($result);
+        $this->assertEquals(404, $result->getStatusCode());
     }
 }
