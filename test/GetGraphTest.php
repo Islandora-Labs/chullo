@@ -77,17 +77,22 @@ EOD;
         $guzzle = new Client(['handler' => $handler]);
         $api = new FedoraApi($guzzle);
 
-        $graph = $api->getGraph();
+        $result = $api->getResource("");
+
+        $graph = $api->getGraph($result);
         $title = (string)$graph->get(
             "http://127.0.0.1:8080/fcrepo/rest/4d/8b/2d/8e/4d8b2d8e-d063-4c9f-aac9-6b285b193ed6",
             "dc:title"
         );
-        $this->assertSame($title, "My Sweet Title");
+
+        $this->assertSame("My Sweet Title", $title);
     }
 
     /**
      * @covers  Islandora\Chullo\FedoraApi::getGraph
      * @uses    GuzzleHttp\Client
+     *
+     * TODO: Is this useful anymore?
      */
     public function testReturnsNullOtherwise()
     {
@@ -101,11 +106,11 @@ EOD;
         $api = new FedoraApi($guzzle);
 
         // 304
-        $result = $api->getGraph("");
-        $this->assertNull($result);
+        $result = $api->getGraph($api->getResource(""));
+        $this->assertEquals(new \EasyRdf_Graph(), $result);
 
         //404
-        $result = $api->getGraph("");
-        $this->assertNull($result);
+        $result = $api->getGraph($api->getResource(""));
+        $this->assertEquals(new \EasyRdf_Graph(), $result);
     }
 }

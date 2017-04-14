@@ -255,12 +255,14 @@ class FedoraApi implements IFedoraApi
         $headers['Content-Type'] = 'text/turtle';
         $headers['digest'] = 'sha1=' . $checksum_value;
 
+        $options['headers'] = $headers;
+        $options['body'] = $turtle;
+
         // Save it.
         return $this->client->request(
             'POST',
-            $turtle,
             $uri,
-            $headers
+            $options
         );
     }
 
@@ -269,14 +271,16 @@ class FedoraApi implements IFedoraApi
      *
      * @param ResponseInterface   $request    Response received
      *
-     * @return EasyRdf_Resource
+     * @return \EasyRdf_Graph
      */
     public function getGraph(ResponseInterface $response)
     {
         // Extract rdf as response body and return Easy_RDF Graph object.
-        $rdf = $response->getBody();
+        $rdf = $response->getBody()->getContents();
         $graph = new \EasyRdf_Graph();
-        $graph->parse($rdf, 'jsonld');
+        if (!empty($rdf)) {
+            $graph->parse($rdf, 'jsonld');
+        }
         return $graph;
     }
 }

@@ -26,12 +26,15 @@ class CreateResourceTest extends \PHPUnit_Framework_TestCase
         $api = new FedoraApi($guzzle);
 
         $result = $api->createResource("");
-        $this->assertSame($result, "SOME URI");
+        $this->assertEquals($result->getHeaderLine("Location"), "SOME URI");
+        $this->assertEquals(201, $result->getStatusCode(), "Expected a 201 response.");
     }
 
     /**
      * @covers  Islandora\Chullo\FedoraApi::createResource
      * @uses    GuzzleHttp\Client
+     *
+     * TODO: Is this useful anymore?
      */
     public function testReturnsNullOtherwise()
     {
@@ -46,10 +49,10 @@ class CreateResourceTest extends \PHPUnit_Framework_TestCase
 
         // 404
         $result = $api->createResource("");
-        $this->assertNull($result);
+        $this->assertEquals(404, $result->getStatusCode());
 
         // 409
         $result = $api->createResource("");
-        $this->assertNull($result);
+        $this->assertEquals(409, $result->getStatusCode());
     }
 }
