@@ -18,7 +18,7 @@ class CreateResourceTest extends \PHPUnit_Framework_TestCase
     public function testReturnsUriOn201()
     {
         $mock = new MockHandler([
-            new Response(201, ['Location' => "SOME URI"]),
+            new Response(201, [], "SOME URI"),
         ]);
 
         $handler = HandlerStack::create($mock);
@@ -26,9 +26,8 @@ class CreateResourceTest extends \PHPUnit_Framework_TestCase
         $api = new FedoraApi($guzzle);
 
         $result = $api->createResource("");
-        $this->assertSame($result, "SOME URI");
+        $this->assertSame((string)$result->getBody(), "SOME URI");
     }
-
     /**
      * @covers  Islandora\Chullo\FedoraApi::createResource
      * @uses    GuzzleHttp\Client
@@ -46,10 +45,10 @@ class CreateResourceTest extends \PHPUnit_Framework_TestCase
 
         // 404
         $result = $api->createResource("");
-        $this->assertNull($result);
+        $this->assertSame((string)$result->getStatusCode(), "404");
 
         // 409
         $result = $api->createResource("");
-        $this->assertNull($result);
+        $this->assertSame((string)$result->getStatusCode(), "409");
     }
 }
