@@ -47,26 +47,4 @@ class GetResourceHeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result->hasHeader("etag"));
         $this->assertEquals("bbdd92e395800153a686773f773bcad80a51f47b", $result->getHeaderLine("ETag"));
     }
-
-    /**
-     * @covers  Islandora\Chullo\FedoraApi::getResourceHeaders
-     * @uses    GuzzleHttp\Client
-     *
-     * TODO: Is this useful anymore?
-     */
-    public function testReturnsNullOtherwise()
-    {
-        $mock = new MockHandler(
-            [
-            new Response(404),
-            ]
-        );
-
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
-
-        $result = $api->getResourceHeaders("");
-        $this->assertEquals(404, $result->getStatusCode());
-    }
 }

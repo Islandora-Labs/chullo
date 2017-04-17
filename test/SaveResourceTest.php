@@ -28,28 +28,4 @@ class SaveResourceTest extends \PHPUnit_Framework_TestCase
         $result = $api->saveResource("");
         $this->assertEquals(204, $result->getStatusCode());
     }
-
-    /**
-     * @covers  Islandora\Chullo\FedoraApi::saveResource
-     * @uses    GuzzleHttp\Client
-     *
-     * TODO: Is this useful anymore?
-     */
-    public function testReturnsFalseOtherwise()
-    {
-        $mock = new MockHandler([
-            new Response(409),
-            new Response(412),
-        ]);
-
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
-
-        $result = $api->createResource("");
-        $this->assertEquals(409, $result->getStatusCode());
-
-        $result = $api->createResource("");
-        $this->assertEquals(412, $result->getStatusCode());
-    }
 }

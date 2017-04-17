@@ -87,30 +87,4 @@ EOD;
 
         $this->assertSame("My Sweet Title", $title);
     }
-
-    /**
-     * @covers  Islandora\Chullo\FedoraApi::getGraph
-     * @uses    GuzzleHttp\Client
-     *
-     * TODO: Is this useful anymore?
-     */
-    public function testReturnsNullOtherwise()
-    {
-        $mock = new MockHandler([
-            new Response(304),
-            new Response(404),
-        ]);
-
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
-
-        // 304
-        $result = $api->getGraph($api->getResource(""));
-        $this->assertEquals(new \EasyRdf_Graph(), $result);
-
-        //404
-        $result = $api->getGraph($api->getResource(""));
-        $this->assertEquals(new \EasyRdf_Graph(), $result);
-    }
 }

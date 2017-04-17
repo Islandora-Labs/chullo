@@ -28,29 +28,4 @@ class ModifyResourceTest extends \PHPUnit_Framework_TestCase
         $result = $api->modifyResource("");
         $this->assertEquals(204, $result->getStatusCode());
     }
-
-    /**
-     * @covers  Islandora\Chullo\FedoraApi::modifyResource
-     * @uses    GuzzleHttp\Client
-     *
-     * TODO: Is this useful anymore?
-     */
-    public function testReturnsFalseOtherwise()
-    {
-        $mock = new MockHandler([
-            new Response(412),
-            new Response(404),
-        ]);
-
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
-
-
-        $result = $api->modifyResource("");
-        $this->assertEquals(412, $result->getStatusCode());
-
-        $result = $api->modifyResource("");
-        $this->assertEquals(404, $result->getStatusCode());
-    }
 }
