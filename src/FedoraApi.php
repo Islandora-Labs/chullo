@@ -255,11 +255,8 @@ class FedoraApi implements IFedoraApi
         $headers['Content-Type'] = 'text/turtle';
         $headers['digest'] = 'sha1=' . $checksum_value;
 
-        $options['headers'] = $headers;
-        $options['body'] = $turtle;
-
         // Save it.
-        return $this->saveResource($uri, $turtle);
+        return $this->saveResource($uri, $turtle, $headers);
     }
 
     /**
@@ -286,11 +283,8 @@ class FedoraApi implements IFedoraApi
         $headers['Content-Type'] = 'text/turtle';
         $headers['digest'] = 'sha1=' . $checksum_value;
 
-        $options['headers'] = $headers;
-        $options['body'] = $turtle;
-
         // Save it.
-        return $this->createResource($uri, $turtle);
+        return $this->createResource($uri, $turtle, $headers);
     }
 
 
