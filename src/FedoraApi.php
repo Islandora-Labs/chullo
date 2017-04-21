@@ -259,12 +259,40 @@ class FedoraApi implements IFedoraApi
         $options['body'] = $turtle;
 
         // Save it.
-        return $this->client->request(
-            'POST',
-            $uri,
-            $options
-        );
+        return $this->saveResource($uri, $turtle);
     }
+
+    /**
+     * Creates RDF in Fedora.
+     *
+     * @param EasyRdf_Resource  $graph          Graph to save
+     * @param string            $uri            Resource URI
+     * @param array             $headers        HTTP Headers
+     *
+     * @return ResponseInterface
+     */
+    public function createGraph(
+        \EasyRdf_Graph $graph,
+        $uri = '',
+        $headers = []
+    ) {
+        // Serialze the rdf.
+        $turtle = $graph->serialise('turtle');
+
+        // Checksum it.
+        $checksum_value = sha1($turtle);
+
+        // Set headers.
+        $headers['Content-Type'] = 'text/turtle';
+        $headers['digest'] = 'sha1=' . $checksum_value;
+
+        $options['headers'] = $headers;
+        $options['body'] = $turtle;
+
+        // Save it.
+        return $this->createResource($uri, $turtle);
+    }
+
 
     /**
      * Gets RDF in Fedora.
