@@ -36,6 +36,7 @@ interface IFedoraApi
      *
      * @param string    $uri            Resource URI
      * @param array     $headers        HTTP Headers
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function getResource(
         $uri = "",
@@ -47,6 +48,7 @@ interface IFedoraApi
      *
      * @param string    $uri            Resource URI
      * @param array     $headers        HTTP Headers
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function getResourceHeaders(
         $uri = "",
@@ -58,6 +60,7 @@ interface IFedoraApi
      *
      * @param string    $uri            Resource URI
      * @param array     $headers        HTTP Headers
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function getResourceOptions(
         $uri = "",
@@ -70,6 +73,7 @@ interface IFedoraApi
      * @param string    $uri                  Resource URI
      * @param string    $content              String or binary content
      * @param array     $headers              HTTP Headers
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function createResource(
         $uri = "",
@@ -83,6 +87,7 @@ interface IFedoraApi
      * @param string    $uri                  Resource URI
      * @param string    $content              String or binary content
      * @param array     $headers              HTTP Headers
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function saveResource(
         $uri,
@@ -96,6 +101,7 @@ interface IFedoraApi
      * @param string    $uri            Resource URI
      * @param string    $sparql         SPARQL Update query
      * @param array     $headers        HTTP Headers
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function modifyResource(
         $uri,
@@ -108,6 +114,7 @@ interface IFedoraApi
      *
      * @param string    $uri            Resource URI
      * @param array     $headers        HTTP Headers
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function deleteResource(
         $uri = "",
@@ -120,6 +127,7 @@ interface IFedoraApi
      * @param EasyRdf_Resource  $rdf            Graph to save
      * @param string            $uri            Resource URI
      * @param array             $headers        HTTP Headers
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function saveGraph(
         \EasyRdf_Graph $graph,
