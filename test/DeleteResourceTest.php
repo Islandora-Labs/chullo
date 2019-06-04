@@ -7,8 +7,9 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Islandora\Chullo\FedoraApi;
+use PHPUnit\Framework\TestCase;
 
-class DeleteResourceTest extends \PHPUnit_Framework_TestCase
+class DeleteResourceTest extends TestCase
 {
 
     /**

@@ -7,8 +7,9 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Islandora\Chullo\FedoraApi;
+use PHPUnit\Framework\TestCase;
 
-class GetGraphTest extends \PHPUnit_Framework_TestCase
+class GetGraphTest extends TestCase
 {
 
     /**
@@ -21,9 +22,9 @@ class GetGraphTest extends \PHPUnit_Framework_TestCase
             [ {
               "@id" : "http://127.0.0.1:8080/fcrepo/rest/4d/8b/2d/8e/4d8b2d8e-d063-4c9f-aac9-6b285b193ed6",
               "@type" : [ "http://www.w3.org/ns/ldp#RDFSource", "http://www.w3.org/ns/ldp#Container",
-"http://www.jcp.org/jcr/nt/1.0folder", "http://www.jcp.org/jcr/nt/1.0hierarchyNode", 
-"http://www.jcp.org/jcr/nt/1.0base", "http://www.jcp.org/jcr/mix/1.0created", 
-"http://fedora.info/definitions/v4/repository#Container", "http://fedora.info/definitions/v4/repository#Resource", 
+"http://www.jcp.org/jcr/nt/1.0folder", "http://www.jcp.org/jcr/nt/1.0hierarchyNode",
+"http://www.jcp.org/jcr/nt/1.0base", "http://www.jcp.org/jcr/mix/1.0created",
+"http://fedora.info/definitions/v4/repository#Container", "http://fedora.info/definitions/v4/repository#Resource",
 "http://www.jcp.org/jcr/mix/1.0lastModified", "http://www.jcp.org/jcr/mix/1.0referenceable" ],
               "http://fedora.info/definitions/v4/repository#created" : [ {
                 "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
@@ -33,7 +34,7 @@ class GetGraphTest extends \PHPUnit_Framework_TestCase
                 "@value" : "bypassAdmin"
               } ],
               "http://fedora.info/definitions/v4/repository#exportsAs" : [ {
-                "@id" : 
+                "@id" :
 "http://127.0.0.1:8080/fcrepo/rest/4d/8b/2d/8e/4d8b2d8e-d063-4c9f-aac9-6b285b193ed6/fcr:export?format=jcr/xml"
               } ],
               "http://fedora.info/definitions/v4/repository#hasParent" : [ {

@@ -7,8 +7,9 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Islandora\Chullo\FedoraApi;
+use PHPUnit\Framework\TestCase;
 
-class CreateGraphTest extends \PHPUnit_Framework_TestCase
+class CreateGraphTest extends TestCase
 {
 
     /**
