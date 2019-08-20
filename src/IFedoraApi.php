@@ -17,8 +17,6 @@
 
 namespace Islandora\Chullo;
 
-use Psr\Http\Message\ResponseInterface;
-
 /**
  * Interface for Fedora interaction.  All functions return a PSR-7 response.
  */

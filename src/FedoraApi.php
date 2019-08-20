@@ -20,7 +20,6 @@ namespace Islandora\Chullo;
 
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Default implementation of IFedoraApi using Guzzle.
