@@ -3,10 +3,10 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/Islandora/chullo.svg?style=flat-square)](https://packagist.org/packages/islandora/chullo)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://php.net/)
 [![Downloads](https://img.shields.io/packagist/dt/islandora/chullo.svg?style=flat-square)](https://packagist.org/packages/islandora/chullo)
-[![Build Status](https://travis-ci.org/Islandora-CLAW/chullo.svg?branch=master)](https://travis-ci.org/Islandora-CLAW/chullo)
+[![Build Status](https://travis-ci.org/Islandora/chullo.svg?branch=master)](https://travis-ci.org/Islandora/chullo)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
-[![codecov](https://codecov.io/gh/Islandora-CLAW/chullo/branch/master/graph/badge.svg)](https://codecov.io/gh/Islandora-CLAW/chullo)
+[![codecov](https://codecov.io/gh/Islandora/chullo/branch/master/graph/badge.svg)](https://codecov.io/gh/Islandora/chullo)
 
 ## Introduction
 Chullo is a PHP client for [Fedora](http://fedorarepository.org/) built using [Guzzle](http://guzzlephp.org) and [EasyRdf](http://www.easyrdf.org/).
@@ -20,7 +20,7 @@ This module requires the following modules/libraries:
 
 ## Installation
 
-1. `git clone git@github.com:Islandora-CLAW/chullo.git`
+1. `git clone git@github.com:Islandora/chullo.git`
 2. `cd chullo`
 3. `php composer.phar install`
 
@@ -66,7 +66,7 @@ $chullo->saveGraph($uri, $graph);
 
 ## Documentation
 
-Further documentation for this module is available on the [Islandora 8 documentation site](https://islandora-claw.github.io/CLAW/).
+Further documentation for this module is available on the [Islandora 8 documentation site](https://islandora.github.io/documentation/).
 
 ## Troubleshooting/Issues
 
@@ -84,7 +84,7 @@ Current maintainers:
 
 ## Development
 
-If you would like to contribute, please get involved by attending our weekly [Tech Call](https://github.com/Islandora-CLAW/CLAW/wiki). We love to hear from you!
+If you would like to contribute, please get involved by attending our weekly [Tech Call](https://github.com/Islandora/documentation/wiki). We love to hear from you!
 
 If you would like to contribute code to the project, you need to be covered by an Islandora Foundation [Contributor License Agreement](http://islandora.ca/sites/default/files/islandora_cla.pdf) or [Corporate Contributor License Agreement](http://islandora.ca/sites/default/files/islandora_ccla.pdf). Please see the [Contributors](http://islandora.ca/resources/contributors) pages on Islandora.ca for more information.
 
