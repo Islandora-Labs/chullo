@@ -7,10 +7,11 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Islandora\Chullo\FedoraApi;
+use PHPUnit\Framework\TestCase;
 use \RuntimeException;
 use \DateTime;
 
-class CreateVersionTest extends \PHPUnit_Framework_TestCase
+class CreateVersionTest extends TestCase
 {
 
     /**
