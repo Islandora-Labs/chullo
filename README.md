@@ -3,10 +3,10 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/Islandora/chullo.svg?style=flat-square)](https://packagist.org/packages/islandora/chullo)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://php.net/)
 [![Downloads](https://img.shields.io/packagist/dt/islandora/chullo.svg?style=flat-square)](https://packagist.org/packages/islandora/chullo)
-[![Build Status](https://travis-ci.org/Islandora/chullo.svg?branch=master)](https://travis-ci.org/Islandora/chullo)
+[![Build Status](https://travis-ci.org/Islandora/chullo.svg?branch=main)](https://travis-ci.org/Islandora/chullo)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
-[![codecov](https://codecov.io/gh/Islandora/chullo/branch/master/graph/badge.svg)](https://codecov.io/gh/Islandora/chullo)
+[![codecov](https://codecov.io/gh/Islandora/chullo/branch/main/graph/badge.svg)](https://codecov.io/gh/Islandora/chullo)
 
 ## Introduction
 Chullo is a PHP client for [Fedora](http://fedorarepository.org/) built using [Guzzle](http://guzzlephp.org) and [EasyRdf](http://www.easyrdf.org/).
@@ -35,7 +35,7 @@ You can also install with composer by pointing to your local clone. Just add the
         }
     ],
     "require": {
-        "islandora/chullo": "dev-master"
+        "islandora/chullo": "dev-main"
     }
 }
 ```
