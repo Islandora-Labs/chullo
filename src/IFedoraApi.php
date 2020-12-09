@@ -130,7 +130,7 @@ interface IFedoraApi
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function saveGraph(
-        \EasyRdf_Graph $graph,
+        \EasyRdf\Graph $graph,
         $uri = "",
         $headers = []
     );

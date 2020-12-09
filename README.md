@@ -15,7 +15,7 @@ Chullo is a PHP client for [Fedora](http://fedorarepository.org/) built using [G
 
 This module requires the following modules/libraries:
 
-* PHP 5.6+
+* PHP 7.4+
 * [Composer](https://getcomposer.org/)
 
 ## Installation

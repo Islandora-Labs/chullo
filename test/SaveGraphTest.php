@@ -7,8 +7,9 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Islandora\Chullo\FedoraApi;
+use PHPUnit\Framework\TestCase;
 
-class SaveGraphTest extends \PHPUnit_Framework_TestCase
+class SaveGraphTest extends TestCase
 {
 
     /**
@@ -25,7 +26,7 @@ class SaveGraphTest extends \PHPUnit_Framework_TestCase
         $guzzle = new Client(['handler' => $handler]);
         $api = new FedoraApi($guzzle);
 
-        $result = $api->saveGraph(new \EasyRdf_Graph());
+        $result = $api->saveGraph(new \EasyRdf\Graph());
         $this->assertEquals(204, $result->getStatusCode());
     }
 }

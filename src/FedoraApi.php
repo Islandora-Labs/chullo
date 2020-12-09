@@ -243,7 +243,7 @@ class FedoraApi implements IFedoraApi
      * @return ResponseInterface
      */
     public function saveGraph(
-        \EasyRdf_Graph $graph,
+        \EasyRdf\Graph $graph,
         $uri = '',
         $headers = []
     ) {
@@ -271,7 +271,7 @@ class FedoraApi implements IFedoraApi
      * @return ResponseInterface
      */
     public function createGraph(
-        \EasyRdf_Graph $graph,
+        \EasyRdf\Graph $graph,
         $uri = '',
         $headers = []
     ) {
@@ -295,13 +295,13 @@ class FedoraApi implements IFedoraApi
      *
      * @param ResponseInterface   $request    Response received
      *
-     * @return \EasyRdf_Graph
+     * @return \EasyRdf\Graph
      */
     public function getGraph(ResponseInterface $response)
     {
         // Extract rdf as response body and return Easy_RDF Graph object.
         $rdf = $response->getBody()->getContents();
-        $graph = new \EasyRdf_Graph();
+        $graph = new \EasyRdf\Graph();
         if (!empty($rdf)) {
             $graph->parse($rdf, 'jsonld');
         }
