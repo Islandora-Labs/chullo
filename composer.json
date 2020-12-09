@@ -20,12 +20,12 @@
     },
     "scripts": {
         "check": [
-            "phpcs --standard=PSR2 src test",
-            "phpcpd --suffix *.php src test"
+            "vendor/bin/phpcs --standard=PSR2 src test",
+            "vendor/bin/phpcpd --suffix *.php src test"
         ],
         "test": [
             "@check",
-            "phpunit"
+            "vendor/bin/phpunit"
         ]
     },
     "license": "MIT",
