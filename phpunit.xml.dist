@@ -8,7 +8,7 @@
       <directory suffix=".php">test/</directory>
     </exclude>
     <report>
-      <clover outputFile="clover.xml"/>
+      <clover outputFile="coverage.xml"/>
     </report>
   </coverage>
   <testsuites>
