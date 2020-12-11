@@ -19,11 +19,11 @@ namespace Islandora\Chullo;
 
 use Psr\Http\Message\ResponseInterface;
 
-// @codingStandardsIgnoreStart
+// phpcs:disable
 if (version_compare(PHP_VERSION, '7.4.0', 'lt')) {
     class_alias('\EasyRdf_Graph', ' \EasyRdf\Graph');
 }
-// @codingStandardsIgnoreEnd
+// phpcs:enable
 
 /**
  * Interface for Fedora interaction.  All functions return a PSR-7 response.

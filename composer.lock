@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a47def4720cb3b7e120e81f477d9278b",
+    "content-hash": "f3b21a1a2d75f1b0f587503fca81a4c0",
     "packages": [
         {
             "name": "easyrdf/easyrdf",
@@ -3060,7 +3060,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4"
+        "php": "^7.3 || ^7.4"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
