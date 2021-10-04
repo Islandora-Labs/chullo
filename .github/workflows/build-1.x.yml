@@ -4,11 +4,11 @@ name: CI
 
 # Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the 7.x branch
+  # Triggers the workflow on push or pull request events but only for the 1.x branch
   push:
-    branches: [ dev, main ]
+    branches: [ 1.x ]
   pull_request:
-    branches: [ dev, main ]
+    branches: [ 1.x ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
