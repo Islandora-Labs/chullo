@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/Islandora/chullo.svg?style=flat-square)](https://packagist.org/packages/islandora/chullo)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg?style=flat-square)](https://php.net/)
 [![Downloads](https://img.shields.io/packagist/dt/islandora/chullo.svg?style=flat-square)](https://packagist.org/packages/islandora/chullo)
-[![Build Status](https://github.com/islandora/chullo/actions/workflows/build-dev.yml/badge.svg)](https://github.com/Islandora/chullo/actions)
+[![Build Status](https://github.com/islandora/chullo/actions/workflows/build-1.x.yml/badge.svg)](https://github.com/Islandora/chullo/actions)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
 [![codecov](https://codecov.io/gh/Islandora/chullo/branch/main/graphs/badge.svg)](https://codecov.io/gh/Islandora/chullo)
@@ -35,7 +35,7 @@ You can also install with composer by pointing to your local clone. Just add the
         }
     ],
     "require": {
-        "islandora/chullo": "dev-main"
+        "islandora/chullo": "^1"
     }
 }
 ```
