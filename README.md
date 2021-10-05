@@ -35,7 +35,7 @@ You can also install with composer by pointing to your local clone. Just add the
         }
     ],
     "require": {
-        "islandora/chullo": "~1.x"
+        "islandora/chullo": "^1"
     }
 }
 ```
