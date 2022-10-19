@@ -8,7 +8,7 @@
     },
     "require": {
         "php": ">=7.3",
-        "guzzlehttp/guzzle": "^6.1.0",
+        "guzzlehttp/guzzle": "^6.1 || ^7",
         "easyrdf/easyrdf": "^0.9 || ^1",
         "ml/json-ld": "^1.0.4"
     },
@@ -20,12 +20,12 @@
     },
     "scripts": {
         "check": [
-            "vendor/bin/phpcs --standard=PSR2 src test",
-            "vendor/bin/phpcpd --suffix *.php src test"
+            "phpcs --standard=PSR2 src test",
+            "phpcpd --suffix *.php src test"
         ],
         "test": [
             "@check",
-            "vendor/bin/phpunit"
+            "phpunit"
         ]
     },
     "license": "MIT",
