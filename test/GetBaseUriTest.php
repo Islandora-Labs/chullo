@@ -1,27 +1,24 @@
 <?php
 
-namespace Islandora\Chullo;
+namespace Islandora\Chullo\Test;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
 use Islandora\Chullo\FedoraApi;
-use PHPUnit\Framework\TestCase;
 
-class GetBaseUriTest extends TestCase
+class GetBaseUriTest extends ChulloTestBase
 {
 
     /**
-     * @covers  Islandora\Chullo\FedoraApi::getBaseUri
-     * @uses    GuzzleHttp\Client
+     * @covers  \Islandora\Chullo\FedoraApi::getBaseUri
+     * @uses    \GuzzleHttp\Client
      */
     public function testReturnsUri()
     {
-        $guzzle = new Client(['base_uri'=>'http://localhost:8080/fcrepo/rest']);
-        $api = new FedoraApi($guzzle);
+        $input = 'http://localhost:8080/fcrepo/rest';
+        $api = FedoraApi::create($input);
+        # Base Uri always has a forward slash on the end.
+        $expected = 'http://localhost:8080/fcrepo/rest/';
 
         $baseUri = $api->getBaseUri();
-        $this->assertEquals($baseUri, 'http://localhost:8080/fcrepo/rest');
+        $this->assertEquals($expected, $baseUri);
     }
 }

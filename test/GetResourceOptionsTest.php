@@ -1,20 +1,16 @@
 <?php
 
-namespace Islandora\Chullo;
+namespace Islandora\Chullo\Test;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
+use donatj\MockWebServer\Response;
 use Islandora\Chullo\FedoraApi;
-use PHPUnit\Framework\TestCase;
 
-class GetResourceOptionsTest extends TestCase
+class GetResourceOptionsTest extends ChulloTestBase
 {
 
     /**
-     * @covers  Islandora\Chullo\FedoraApi::getResourceOptions
-     * @uses    GuzzleHttp\Client
+     * @covers  \Islandora\Chullo\FedoraApi::getResourceOptions
+     * @uses    \GuzzleHttp\Client
      */
     public function testReturnsHeadersOn200()
     {
@@ -25,15 +21,13 @@ class GetResourceOptionsTest extends TestCase
             'Accept-Post' => 'text/turtle,text/rdf+n3,application/n3,text/n3,application/rdf+xml,' .
                 'application/n-triples,multipart/form-data,application/sparql-update',
         ];
-        $mock = new MockHandler([
-          new Response(200, $headers),
-        ]);
+        $test_uri = self::$webserver->setResponseOfPath(
+            "/test_options",
+            new Response("", $headers, 200)
+        );
+        $api = FedoraApi::create(self::$webserver->getHost());
 
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
-
-        $result = $api->getResourceOptions("");
+        $result = $api->getResourceOptions($test_uri);
         $this->assertEquals(200, $result->getStatusCode());
         $this->assertEquals($headers['Allow'], $result->getHeaderLine('allow'));
         $this->assertEquals($headers['Accept-Patch'], $result->getHeaderLine('accept-patch'));

@@ -1,24 +1,19 @@
 <?php
 
-namespace Islandora\Chullo;
+namespace Islandora\Chullo\Test;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
+use donatj\MockWebServer\Response;
 use Islandora\Chullo\FedoraApi;
-use PHPUnit\Framework\TestCase;
 
-class GetResourceHeadersTest extends TestCase
+class GetResourceHeadersTest extends ChulloTestBase
 {
 
     /**
-     * @covers  Islandora\Chullo\FedoraApi::getResourceHeaders
-     * @uses    GuzzleHttp\Client
+     * @covers  \Islandora\Chullo\FedoraApi::getResourceHeaders
+     * @uses    \GuzzleHttp\Client
      */
     public function testReturnsHeadersOn200()
     {
-
         $headers = [
             'Status' => '200 OK',
             'ETag' => "bbdd92e395800153a686773f773bcad80a51f47b",
@@ -31,18 +26,18 @@ class GetResourceHeadersTest extends TestCase
                 'multipart/form-data,application/sparql-update',
             'Allow' => 'MOVE,COPY,DELETE,POST,HEAD,GET,PUT,PATCH,OPTIONS',
         ];
-
-        $mock = new MockHandler(
-            [
-            new Response(200, $headers)
-            ]
+        $test_uri = self::$webserver->setResponseOfPath(
+            "/rest/path/to/resource",
+            new Response(
+                "",
+                $headers,
+                200
+            )
         );
 
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
+        $api =  FedoraApi::create(self::$webserver->getHost());
 
-        $result = $api->getResourceHeaders("");
+        $result = $api->getResourceHeaders($test_uri);
 
         $this->assertEquals(200, $result->getStatusCode());
         $this->assertTrue($result->hasHeader("etag"));

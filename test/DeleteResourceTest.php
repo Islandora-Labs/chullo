@@ -1,32 +1,35 @@
 <?php
 
-namespace Islandora\Chullo;
+namespace Islandora\Chullo\Test;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
+use donatj\MockWebServer\Response;
+use donatj\MockWebServer\ResponseByMethod;
 use Islandora\Chullo\FedoraApi;
-use PHPUnit\Framework\TestCase;
 
-class DeleteResourceTest extends TestCase
+class DeleteResourceTest extends ChulloTestBase
 {
 
     /**
-     * @covers  Islandora\Chullo\FedoraApi::deleteResource
-     * @uses    GuzzleHttp\Client
+     * @covers  \Islandora\Chullo\FedoraApi::deleteResource
+     * @uses    \GuzzleHttp\Client
      */
     public function testReturnsTrueOn204()
     {
-        $mock = new MockHandler([
-            new Response(204),
-        ]);
+        $test_uri = self::$webserver->setResponseOfPath(
+            '/rest/some/path',
+            new ResponseByMethod([
+                ResponseByMethod::METHOD_DELETE =>
+                    new Response(
+                        "",
+                        [],
+                        204
+                    ),
+            ])
+        );
 
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
+        $api = FedoraApi::create(self::$webserver->getHost());
 
-        $result = $api->deleteResource("");
+        $result = $api->deleteResource($test_uri);
         $this->assertEquals(204, $result->getStatusCode());
     }
 }
