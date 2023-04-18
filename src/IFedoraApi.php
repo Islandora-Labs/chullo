@@ -72,13 +72,13 @@ interface IFedoraApi
      * Creates a new resource in Fedora.
      *
      * @param string      $uri                  Resource URI
-     * @param string|null $content              String or binary content
+     * @param mixed|null $content              String, resource from fopen() or stream content
      * @param array       $headers              HTTP Headers
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function createResource(
         string $uri = "",
-        ?string $content = null,
+        $content = null,
         array $headers = []
     ): ResponseInterface;
 
@@ -86,13 +86,13 @@ interface IFedoraApi
      * Saves a resource in Fedora.
      *
      * @param string      $uri                  Resource URI
-     * @param string|null $content              String or binary content
+     * @param mixed|null $content               String, resource from fopen() or stream content
      * @param array       $headers              HTTP Headers
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function saveResource(
         string $uri,
-        ?string $content = null,
+        $content = null,
         array $headers = []
     ): ResponseInterface;
 

@@ -136,7 +136,7 @@ class FedoraApi implements IFedoraApi
      */
     public function createResource(
         string $uri = "",
-        ?string $content = null,
+        $content = null,
         array $headers = []
     ): ResponseInterface {
         $options = ['http_errors' => false];
@@ -159,7 +159,7 @@ class FedoraApi implements IFedoraApi
      */
     public function saveResource(
         string $uri,
-        ?string $content = null,
+        $content = null,
         array $headers = []
     ): ResponseInterface {
         $options = ['http_errors' => false];
