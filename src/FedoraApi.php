@@ -20,6 +20,7 @@ namespace Islandora\Chullo;
 
 use EasyRdf\Graph;
 use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7;
 use Psr\Http\Message\ResponseInterface;
 use \RuntimeException;
@@ -47,11 +48,15 @@ class FedoraApi implements IFedoraApi
     /**
      * @codeCoverageIgnore
      */
-    private function __construct(string $uri)
+    private function __construct(string $uri, ?HandlerStack $stack)
     {
         $normalized = rtrim($uri);
         $normalized = rtrim($normalized, '/') . '/';
-        $this->client = new Client(['base_uri' => $normalized]);
+        $guzzle_opts = ['base_uri' => $normalized];
+        if (!is_null($stack)) {
+            $guzzle_opts['handler'] = $stack;
+        }
+        $this->client = new Client($guzzle_opts);
         $this->base_uri = $normalized;
     }
 
@@ -60,7 +65,15 @@ class FedoraApi implements IFedoraApi
      */
     public static function create(string $fedora_rest_url): self
     {
-        return new static($fedora_rest_url);
+        return new static($fedora_rest_url, null);
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public static function createWithHandler(string $fedora_rest_url, HandlerStack $stack): self
+    {
+        return new static($fedora_rest_url, $stack);
     }
 
     /**
