@@ -1,60 +1,65 @@
 <?php
 
-namespace Islandora\Chullo;
+namespace Islandora\Chullo\Test;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
+use DateTime;
+use donatj\MockWebServer\Response;
+use donatj\MockWebServer\ResponseByMethod;
 use Islandora\Chullo\FedoraApi;
-use PHPUnit\Framework\TestCase;
-use \RuntimeException;
-use \DateTime;
 
-class CreateVersionTest extends TestCase
+class CreateVersionTest extends ChulloTestBase
 {
 
     /**
-     * @covers  Islandora\Chullo\FedoraApi::createVersion
-     * @uses    GuzzleHttp\Client
+     * @covers  \Islandora\Chullo\FedoraApi::createVersion
+     * @uses    \GuzzleHttp\Client
      */
     public function testReturns201withVersions()
     {
-        $mock = new MockHandler(
-            [
-            new Response(200, ['Link' => '<http://localhost:8080/rest/path/to/resource/fcr:versions>;rel="timemap"']),
-            new Response(201, ['Location' => "SOME URI"])
-            ]
+        $test_uri_timemap = self::$webserver->setResponseOfPath(
+            "/rest/path/to/resource/fcr:versions",
+            new ResponseByMethod([
+                ResponseByMethod::METHOD_POST => new Response("", ['Location' => "SOME URI"], 201)
+            ])
+        );
+        $test_uri = self::$webserver->setResponseOfPath(
+            "/rest/path/to/resource",
+            new ResponseByMethod([
+                ResponseByMethod::METHOD_HEAD => new Response(
+                    "",
+                    ['Link' => "<$test_uri_timemap>; rel=\"timemap\""],
+                    200
+                )
+            ])
         );
 
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
+        $api = FedoraApi::create(self::$webserver->getHost());
         $date = new DateTime();
         $timestamp = $date->format("D, d M Y H:i:s O");
         $content = "test";
-        $result = $api->createVersion('', $timestamp, $content);
+        $result = $api->createVersion($test_uri, $timestamp, $content);
         $this->assertEquals(201, $result->getStatusCode());
     }
 
     /**
-     * @covers  Islandora\Chullo\FedoraApi::createVersion Exception
-     * @uses    GuzzleHttp\Client
+     * @covers  \Islandora\Chullo\FedoraApi::createVersion Exception
+     * @uses    \GuzzleHttp\Client
      */
     public function testThrowsExceptionWithoutTimemapUri()
     {
-        $mock = new MockHandler(
-            [
-            new Response(200, []),
-            new Response(201, ['Location' => "SOME URI"])
-            ]
+        $test_uri = self::$webserver->setResponseOfPath(
+            "/rest/path/to/resource",
+            new ResponseByMethod([
+                ResponseByMethod::METHOD_GET => new Response(
+                    "",
+                    [],
+                    200
+                )
+            ])
         );
-
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
+        $api = FedoraApi::create(self::$webserver->getHost());
 
         $this->expectException(\RuntimeException::class);
-        $result = $api->createVersion('');
+        $api->createVersion($test_uri);
     }
 }

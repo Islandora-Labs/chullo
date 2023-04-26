@@ -17,13 +17,8 @@
 
 namespace Islandora\Chullo;
 
+use EasyRdf\Graph;
 use Psr\Http\Message\ResponseInterface;
-
-// phpcs:disable
-if (class_exists('\EasyRdf_Graph') && !class_exists('\EasyRdf\Graph')) {
-    class_alias('\EasyRdf_Graph', '\EasyRdf\Graph');
-}
-// phpcs:enable
 
 /**
  * Interface for Fedora interaction.  All functions return a PSR-7 response.
@@ -35,19 +30,19 @@ interface IFedoraApi
      *
      * @return string
      */
-    public function getBaseUri();
+    public function getBaseUri(): string;
 
     /**
      * Gets a Fedora resource.
      *
-     * @param string    $uri            Resource URI
-     * @param array     $headers        HTTP Headers
+     * @param string $uri            Resource URI
+     * @param array  $headers        HTTP Headers
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function getResource(
-        $uri = "",
-        $headers = []
-    );
+        string $uri = "",
+        array $headers = []
+    ): ResponseInterface;
 
     /**
      * Gets a Fedora resoure's headers.
@@ -57,9 +52,9 @@ interface IFedoraApi
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function getResourceHeaders(
-        $uri = "",
-        $headers = []
-    );
+        string $uri = "",
+        array $headers = []
+    ): ResponseInterface;
 
     /**
      * Gets information about the supported HTTP methods, etc., for a Fedora resource.
@@ -69,37 +64,37 @@ interface IFedoraApi
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function getResourceOptions(
-        $uri = "",
-        $headers = []
-    );
+        string $uri = "",
+        array $headers = []
+    ): ResponseInterface;
 
     /**
      * Creates a new resource in Fedora.
      *
-     * @param string    $uri                  Resource URI
-     * @param string    $content              String or binary content
-     * @param array     $headers              HTTP Headers
+     * @param string      $uri                  Resource URI
+     * @param mixed|null $content              String, resource from fopen() or stream content
+     * @param array       $headers              HTTP Headers
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function createResource(
-        $uri = "",
+        string $uri = "",
         $content = null,
-        $headers = []
-    );
+        array $headers = []
+    ): ResponseInterface;
 
     /**
      * Saves a resource in Fedora.
      *
-     * @param string    $uri                  Resource URI
-     * @param string    $content              String or binary content
-     * @param array     $headers              HTTP Headers
+     * @param string      $uri                  Resource URI
+     * @param mixed|null $content               String, resource from fopen() or stream content
+     * @param array       $headers              HTTP Headers
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function saveResource(
-        $uri,
+        string $uri,
         $content = null,
-        $headers = []
-    );
+        array $headers = []
+    ): ResponseInterface;
 
     /**
      * Modifies a resource using a SPARQL Update query.
@@ -110,10 +105,10 @@ interface IFedoraApi
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function modifyResource(
-        $uri,
-        $sparql = "",
-        $headers = []
-    );
+        string $uri,
+        string $sparql = "",
+        array $headers = []
+    ): ResponseInterface;
 
     /**
      * Issues a DELETE request to Fedora.
@@ -123,38 +118,64 @@ interface IFedoraApi
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function deleteResource(
-        $uri = "",
-        $headers = []
-    );
+        string $uri = "",
+        array $headers = []
+    ): ResponseInterface;
 
     /**
      * Saves RDF in Fedora.
      *
-     * @param EasyRdf_Resource  $rdf            Graph to save
+     * @param \EasyRdf\Graph    $graph          Graph to save
      * @param string            $uri            Resource URI
      * @param array             $headers        HTTP Headers
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function saveGraph(
-        \EasyRdf\Graph $graph,
-        $uri = "",
-        $headers = []
-    );
+        Graph $graph,
+        string $uri = "",
+        array $headers = []
+    ): ResponseInterface;
+
+    /**
+     * Creates RDF in Fedora.
+     *
+     * @param \EasyRdf\Graph $graph    Graph to save
+     * @param string         $uri      Resource URI
+     * @param array          $headers  HTTP Headers
+     *
+     * @return ResponseInterface
+     */
+    public function createGraph(
+        Graph $graph,
+        string $uri = '',
+        array $headers = []
+    ): ResponseInterface;
+
+    /**
+     * Gets RDF in Fedora.
+     *
+     * @param ResponseInterface $response Response received
+     *
+     * @return \EasyRdf\Graph
+     * @throws \EasyRdf\Exception Unable to parse graph.
+     */
+    public function getGraph(ResponseInterface $response): Graph;
 
     /**
      * Creates a version of the resource in Fedora.
      *
-     * @param string    $uri            Resource URI
-     * @param string    $timestamp      Timestamp in RFC-1123 format
-     * @param array     $headers        HTTP Headers
+     * @param string      $uri            Resource URI
+     * @param string      $timestamp      Timestamp in RFC-1123 format
+     * @param string|null $content        Content for the version
+     * @param array       $headers        HTTP Headers
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function createVersion(
-        $uri = "",
-        $timestamp = "",
-        $content = null,
-        $headers = []
-    );
+        string $uri = "",
+        string $timestamp = "",
+        ?string $content = null,
+        array $headers = []
+    ): ResponseInterface;
 
     /**
      * Creates a version of the resource in Fedora.
@@ -164,7 +185,7 @@ interface IFedoraApi
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function getVersions(
-        $uri = "",
-        $headers = []
-    );
+        string $uri = "",
+        array $headers = []
+    ): ResponseInterface;
 }

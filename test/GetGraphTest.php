@@ -1,20 +1,21 @@
 <?php
 
-namespace Islandora\Chullo;
+namespace Islandora\Chullo\Test;
 
+use donatj\MockWebServer\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
+
 use Islandora\Chullo\FedoraApi;
 use PHPUnit\Framework\TestCase;
 
-class GetGraphTest extends TestCase
+class GetGraphTest extends ChulloTestBase
 {
 
     /**
-     * @covers  Islandora\Chullo\FedoraApi::getGraph
-     * @uses    GuzzleHttp\Client
+     * @covers  \Islandora\Chullo\FedoraApi::getGraph
+     * @uses    \GuzzleHttp\Client
      */
     public function testReturnsContentOn200()
     {
@@ -70,15 +71,18 @@ class GetGraphTest extends TestCase
               } ]
             } ]
 EOD;
-        $mock = new MockHandler([
-            new Response(200, ['Content-Type' => 'application/ld+json'], $fixture),
-        ]);
+        $test_uri = self::$webserver->setResponseOfPath(
+            "/rest/path/to/resource",
+            new Response(
+                $fixture,
+                ['Content-Type' => 'application/ld+json'],
+                200
+            )
+        );
 
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
+        $api = FedoraApi::create(self::$webserver->getHost());
 
-        $result = $api->getResource("");
+        $result = $api->getResource($test_uri);
 
         $graph = $api->getGraph($result);
         $title = (string)$graph->get(

@@ -18,68 +18,79 @@
 
 namespace Islandora\Chullo;
 
+use EasyRdf\Graph;
 use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\HttpFoundation\Response;
 use \RuntimeException;
 
-// phpcs:disable
-if (class_exists('\EasyRdf_Graph')) {
-    class_alias('\EasyRdf_Graph', ' \EasyRdf\Graph');
-}
-// phpcs:enable
-
-//
 /**
  * Default implementation of IFedoraApi using Guzzle.
  */
 class FedoraApi implements IFedoraApi
 {
 
-    protected $client;
+    /**
+     * The client.
+     *
+     * @var \GuzzleHttp\Client
+     */
+    private Client $client;
+
+    /**
+     * Fedora Base URI.
+     *
+     * @var string
+     */
+    private string $base_uri;
 
     /**
      * @codeCoverageIgnore
      */
-    public function __construct(Client $client)
+    private function __construct(string $uri, ?HandlerStack $stack)
     {
-        $this->client = $client;
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public static function create($fedora_rest_url)
-    {
-        $normalized = rtrim($fedora_rest_url);
+        $normalized = rtrim($uri);
         $normalized = rtrim($normalized, '/') . '/';
-        $guzzle = new Client(['base_uri' => $normalized]);
-        return new static($guzzle);
+        $guzzle_opts = ['base_uri' => $normalized];
+        if (!is_null($stack)) {
+            $guzzle_opts['handler'] = $stack;
+        }
+        $this->client = new Client($guzzle_opts);
+        $this->base_uri = $normalized;
     }
 
     /**
-     * Gets the Fedora base uri (e.g. http://localhost:8080/fcrepo/rest)
-     *
-     * @return string
+     * @codeCoverageIgnore
      */
-    public function getBaseUri()
+    public static function create(string $fedora_rest_url): self
     {
-        return $this->client->getConfig('base_uri');
+        return new static($fedora_rest_url, null);
     }
 
     /**
-     * Gets a Fedora resource.
-     *
-     * @param string    $uri            Resource URI
-     * @param array     $headers        HTTP Headers
-     *
-     * @return ResponseInterface
+     * @codeCoverageIgnore
+     */
+    public static function createWithHandler(string $fedora_rest_url, HandlerStack $stack): self
+    {
+        return new static($fedora_rest_url, $stack);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getBaseUri(): string
+    {
+        return $this->base_uri;
+    }
+
+    /**
+     * @inheritDoc
      */
     public function getResource(
-        $uri = "",
-        $headers = []
-    ) {
+        string $uri = "",
+        array $headers = []
+    ): ResponseInterface {
         // Set headers
         $options = ['http_errors' => false, 'headers' => $headers];
 
@@ -92,18 +103,12 @@ class FedoraApi implements IFedoraApi
     }
 
     /**
-     * Gets a Fedora resoure's headers.
-     *
-     * @param string    $uri            Resource URI
-     * @param array     $headers        HTTP Headers
-     *
-     * @return ResponseInterface
+     * @inheritDoc
      */
     public function getResourceHeaders(
-        $uri = "",
-        $headers = []
-    ) {
-
+        string $uri = "",
+        array $headers = []
+    ): ResponseInterface {
         // Send the request.
         return $this->client->request(
             'HEAD',
@@ -113,17 +118,12 @@ class FedoraApi implements IFedoraApi
     }
 
     /**
-     * Gets information about the supported HTTP methods, etc., for a Fedora resource.
-     *
-     * @param string    $uri            Resource URI
-     * @param array     $headers        HTTP Headers
-     *
-     * @return ResponseInterface
+     * @inheritDoc
      */
     public function getResourceOptions(
-        $uri = "",
-        $headers = []
-    ) {
+        string $uri = "",
+        array $headers = []
+    ): ResponseInterface {
         return $this->client->request(
             'OPTIONS',
             $uri,
@@ -132,19 +132,13 @@ class FedoraApi implements IFedoraApi
     }
 
     /**
-     * Creates a new resource in Fedora.
-     *
-     * @param string    $uri                  Resource URI
-     * @param string    $content              String or binary content
-     * @param array     $headers              HTTP Headers
-     *
-     * @return ResponseInterface
+     * @inheritDoc
      */
     public function createResource(
-        $uri = "",
+        string $uri = "",
         $content = null,
-        $headers = []
-    ) {
+        array $headers = []
+    ): ResponseInterface {
         $options = ['http_errors' => false];
 
         // Set content.
@@ -161,19 +155,13 @@ class FedoraApi implements IFedoraApi
     }
 
     /**
-     * Saves a resource in Fedora.
-     *
-     * @param string    $uri                  Resource URI
-     * @param string    $content              String or binary content
-     * @param array     $headers              HTTP Headers
-     *
-     * @return ResponseInterface
+     * @inheritDoc
      */
     public function saveResource(
-        $uri,
+        string $uri,
         $content = null,
-        $headers = []
-    ) {
+        array $headers = []
+    ): ResponseInterface {
         $options = ['http_errors' => false];
 
         // Set content.
@@ -190,19 +178,13 @@ class FedoraApi implements IFedoraApi
     }
 
     /**
-     * Modifies a resource using a SPARQL Update query.
-     *
-     * @param string    $uri            Resource URI
-     * @param string    $sparql         SPARQL Update query
-     * @param array     $headers        HTTP Headers
-     *
-     * @return ResponseInterface
+     * @inheritDoc
      */
     public function modifyResource(
-        $uri,
-        $sparql = "",
-        $headers = []
-    ) {
+        string $uri,
+        string $sparql = "",
+        array $headers = []
+    ): ResponseInterface {
         $options = ['http_errors' => false];
 
         // Set content.
@@ -220,17 +202,12 @@ class FedoraApi implements IFedoraApi
     }
 
     /**
-     * Issues a DELETE request to Fedora.
-     *
-     * @param string    $uri            Resource URI
-     * @param array     $headers        HTTP Headers
-     *
-     * @return ResponseInterface
+     * @inheritDoc
      */
     public function deleteResource(
-        $uri = '',
-        $headers = []
-    ) {
+        string $uri = '',
+        array $headers = []
+    ): ResponseInterface {
         $options = ['http_errors' => false, 'headers' => $headers];
 
         return $this->client->request(
@@ -241,19 +218,13 @@ class FedoraApi implements IFedoraApi
     }
 
     /**
-     * Saves RDF in Fedora.
-     *
-     * @param EasyRdf_Resource  $graph          Graph to save
-     * @param string            $uri            Resource URI
-     * @param array             $headers        HTTP Headers
-     *
-     * @return ResponseInterface
+     * @inheritDoc
      */
     public function saveGraph(
-        \EasyRdf\Graph $graph,
-        $uri = '',
-        $headers = []
-    ) {
+        Graph $graph,
+        string $uri = '',
+        array $headers = []
+    ): ResponseInterface {
         // Serialze the rdf.
         $turtle = $graph->serialise('turtle');
 
@@ -269,20 +240,14 @@ class FedoraApi implements IFedoraApi
     }
 
     /**
-     * Creates RDF in Fedora.
-     *
-     * @param EasyRdf_Resource  $graph          Graph to save
-     * @param string            $uri            Resource URI
-     * @param array             $headers        HTTP Headers
-     *
-     * @return ResponseInterface
+     * @inheritDoc
      */
     public function createGraph(
-        \EasyRdf\Graph $graph,
-        $uri = '',
-        $headers = []
-    ) {
-        // Serialze the rdf.
+        Graph $graph,
+        string $uri = '',
+        array $headers = []
+    ): ResponseInterface {
+        // Serialize the rdf.
         $turtle = $graph->serialise('turtle');
 
         // Checksum it.
@@ -296,19 +261,14 @@ class FedoraApi implements IFedoraApi
         return $this->createResource($uri, $turtle, $headers);
     }
 
-
     /**
-     * Gets RDF in Fedora.
-     *
-     * @param ResponseInterface   $request    Response received
-     *
-     * @return \EasyRdf\Graph
+     * @inheritDoc
      */
-    public function getGraph(ResponseInterface $response)
+    public function getGraph(ResponseInterface $response): Graph
     {
         // Extract rdf as response body and return Easy_RDF Graph object.
         $rdf = $response->getBody()->getContents();
-        $graph = new \EasyRdf\Graph();
+        $graph = new Graph();
         if (!empty($rdf)) {
             $graph->parse($rdf, 'jsonld');
         }
@@ -316,23 +276,19 @@ class FedoraApi implements IFedoraApi
     }
 
     /**
-     * Creates version in Fedora.
-     * @param string $uri Fedora Resource URI
-     * @param string $timestamp Timestamp for Memento version
-     * @param string $content String or binary content
-     * @param array $header HTTP Headers
-     *
-     * @return ResponseInterface
+     * @inheritDoc
      */
     public function createVersion(
         $uri = '',
         $timestamp = '',
         $content = null,
         $headers = []
-    ) {
+    ): ResponseInterface {
         $timemap_uri = $this->getTimemapURI($uri, $headers);
         if ($timemap_uri == null) {
-            throw new \RuntimeException('Timemap URI is null, cannot create version');
+            throw new RuntimeException(
+                'Timemap URI is null, cannot create version'
+            );
         }
         $options = ['http_errors' => false];
         if ($timestamp != '' && $content != null) {
@@ -349,44 +305,43 @@ class FedoraApi implements IFedoraApi
     }
 
     /**
-     * Gets list of versions in Fedora.
-     * @param string $uri Fedora Resource URI
-     * @param array $header HTTP Headers
-     *
-     * @return ResponseInterface
+     * @inheritDoc
      */
     public function getVersions(
         $uri = '',
         $headers = []
-    ) {
+    ): ResponseInterface {
         $timemap_uri = $this->getTimemapURI($uri, $headers);
         if ($timemap_uri == null) {
-            throw new \RuntimeException('Timemap URI is null, cannot create version');
+            throw new RuntimeException(
+                'Timemap URI is null, cannot create version'
+            );
         }
-        $options = ['http_errors' => false, 'headers' => $headers];
-        return $this->client->request(
-            'GET',
-            $timemap_uri,
-            $options
-        );
+
+        return $this->getResource($timemap_uri, $headers);
     }
 
     /**
      * Helper method to get the Headers for a resource
      * and parse the timemap header from it
      * @param string $uri Fedora Resource URI
-     * @param array $header HTTP Headers
+     * @param array $headers HTTP Headers
      *
-     * @return string
+     * @return string|null
      */
     public function getTimemapURI(
-        $uri = '',
-        $headers = []
-    ) {
+        string $uri = '',
+        array $headers = []
+    ): ?string {
         $resource_headers = $this->getResourceHeaders($uri, $headers);
-        $parsed_link_headers = Psr7\parse_header($resource_headers->getHeader('Link'));
+        $parsed_link_headers = Psr7\Header::parse(
+            $resource_headers->getHeader('Link')
+        );
         $timemap_uri = null;
-        $timemap_index = array_search('timemap', array_column($parsed_link_headers, 'rel'));
+        $timemap_index = array_search(
+            'timemap',
+            array_column($parsed_link_headers, 'rel')
+        );
         if (is_int($timemap_index)) {
             $timemap_uri = $parsed_link_headers[$timemap_index][0];
             $timemap_uri = trim($timemap_uri, "<> \t\n\r\0\x0B");

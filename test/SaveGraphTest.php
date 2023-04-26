@@ -1,32 +1,31 @@
 <?php
 
-namespace Islandora\Chullo;
+namespace Islandora\Chullo\Test;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
+use donatj\MockWebServer\Response;
+use donatj\MockWebServer\ResponseByMethod;
+use EasyRdf\Graph;
 use Islandora\Chullo\FedoraApi;
-use PHPUnit\Framework\TestCase;
 
-class SaveGraphTest extends TestCase
+class SaveGraphTest extends ChulloTestBase
 {
 
     /**
-     * @covers  Islandora\Chullo\FedoraApi::saveGraph
-     * @uses    GuzzleHttp\Client
+     * @covers  \Islandora\Chullo\FedoraApi::saveGraph
+     * @uses    \GuzzleHttp\Client
      */
     public function testReturnsTrueOn204()
     {
-        $mock = new MockHandler([
-            new Response(204),
-        ]);
+        $test_uri = self::$webserver->setResponseOfPath(
+            "/rest/path/to/resource",
+            new ResponseByMethod([
+                ResponseByMethod::METHOD_PUT => new Response("", [], 204),
+            ])
+        );
 
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
+        $api = FedoraApi::create(self::$webserver->getHost());
 
-        $result = $api->saveGraph(new \EasyRdf\Graph());
+        $result = $api->saveGraph(new Graph(), $test_uri);
         $this->assertEquals(204, $result->getStatusCode());
     }
 }

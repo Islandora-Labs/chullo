@@ -1,34 +1,35 @@
 <?php
 
-namespace Islandora\Chullo;
+namespace Islandora\Chullo\Test;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
+use donatj\MockWebServer\Response;
+use donatj\MockWebServer\ResponseByMethod;
 use Islandora\Chullo\FedoraApi;
-use PHPUnit\Framework\TestCase;
 
-class CreateResourceTest extends TestCase
+class CreateResourceTest extends ChulloTestBase
 {
 
     /**
-     * @covers  Islandora\Chullo\FedoraApi::createResource
-     * @uses    GuzzleHttp\Client
+     * @covers  \Islandora\Chullo\FedoraApi::createResource
+     * @uses    \GuzzleHttp\Client
      */
     public function testReturnsUriOn201()
     {
-        $mock = new MockHandler(
-            [
-            new Response(201, ['Location' => "SOME URI"]),
-            ]
+        $test_uri = self::$webserver->setResponseOfPath(
+            '/some_uri',
+            new ResponseByMethod([
+                ResponseByMethod::METHOD_POST =>
+                    new Response(
+                        "",
+                        ['Location' => "SOME URI"],
+                        201
+                    )
+            ])
         );
 
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
+        $api = FedoraApi::create(self::$webserver->getHost());
 
-        $result = $api->createResource("");
+        $result = $api->createResource($test_uri);
         $this->assertEquals($result->getHeaderLine("Location"), "SOME URI");
         $this->assertEquals(201, $result->getStatusCode(), "Expected a 201 response.");
     }

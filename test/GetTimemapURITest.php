@@ -1,20 +1,16 @@
 <?php
 
-namespace Islandora\Chullo;
+namespace Islandora\Chullo\Test;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
+use donatj\MockWebServer\Response;
 use Islandora\Chullo\FedoraApi;
-use PHPUnit\Framework\TestCase;
 
-class GetTimemapURITest extends TestCase
+class GetTimemapURITest extends ChulloTestBase
 {
 
     /**
-     * @covers  Islandora\Chullo\FedoraApi::getTimemapURI
-     * @uses    GuzzleHttp\Client
+     * @covers  \Islandora\Chullo\FedoraApi::getTimemapURI
+     * @uses    \GuzzleHttp\Client
      */
     public function testReturnsTimemapHeaderOn200()
     {
@@ -27,18 +23,18 @@ class GetTimemapURITest extends TestCase
             'Link' => '<http://www.w3.org/ns/ldp#Container>;rel="type"',
             'Link' => '<http://localhost:8080/rest/path/to/resource/fcr:versions>;rel="timemap"',
         ];
-
-        $mock = new MockHandler(
-            [
-            new Response(200, $headers)
-            ]
+        $test_uri = self::$webserver->setResponseOfPath(
+            "/rest/path/to/resource",
+            new Response(
+                "",
+                $headers,
+                200
+            )
         );
 
-        $handler = HandlerStack::create($mock);
-        $guzzle = new Client(['handler' => $handler]);
-        $api = new FedoraApi($guzzle);
+        $api = FedoraApi::create(self::$webserver->getHost());
 
-        $timemapuri = $api->getTimemapURI("");
+        $timemapuri = $api->getTimemapURI($test_uri);
 
         $this->assertEquals("http://localhost:8080/rest/path/to/resource/fcr:versions", $timemapuri);
     }
