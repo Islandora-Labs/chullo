@@ -8,7 +8,7 @@
     },
     "require": {
         "php": ">=7.4",
-        "guzzlehttp/guzzle": "^6.5 || ^7.4",
+        "guzzlehttp/guzzle": "^6.5.8 || ^7.4",
         "easyrdf/easyrdf": "^1",
         "ml/json-ld": "^1.0.4"
     },
